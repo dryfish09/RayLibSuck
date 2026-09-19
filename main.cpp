@@ -23,7 +23,7 @@ int main() {
             ballPos.x -= speed;
         }
         if (IsKeyDown(KEY_DOWN)) {
-            // right: <entityPos>.y += speed;
+            // down: <entityPos>.y += speed;
             ballPos.y += speed;
         }
         if (IsKeyDown(KEY_UP)) {
