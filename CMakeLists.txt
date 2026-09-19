@@ -10,7 +10,7 @@ endif()
 
 find_package(raylib 5.5 REQUIRED)
 
-add_executable(game main.cpp)
+add_executable(game src/main.cpp)
 target_link_libraries(game PRIVATE raylib)
 
 if(UNIX AND NOT APPLE)
