@@ -34,7 +34,7 @@ int main() {
         if (ballPos.x - ballRange <= 0) {
             ballPos.x = ballRange;
         }
-        if (ballPos.x + ballRange = windowX) {
+        if (ballPos.x + ballRange >= windowX) {
             ballPos.x = windowX - ballRange;
         }
         if (ballPos.y - ballRange <= 0) {
@@ -51,6 +51,9 @@ int main() {
         DrawText("Use Arrow keys to move!", 20, 20, 20, BLACK);
         EndDrawing();
     }
-    CloseWindow();
+    // only close window when it should close
+    if (WindowShouldClose()) {
+        CloseWindow();
+    }
     return 0;
 }
