@@ -19,7 +19,7 @@ jobs:
       tag: ${{ steps.calc.outputs.tag }}
       title: ${{ steps.calc.outputs.title }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
@@ -38,7 +38,7 @@ jobs:
     needs: prep
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Install build deps
         run: |
@@ -82,7 +82,7 @@ jobs:
     needs: prep
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Install cmake
         run: brew install cmake
@@ -123,7 +123,7 @@ jobs:
     if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
