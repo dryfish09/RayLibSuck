@@ -8,7 +8,6 @@ permissions:
   contents: write
 
 jobs:
-  # Step 1: figure out build number + date (Linux runner, once)
   prep:
     runs-on: ubuntu-latest
     outputs:
@@ -16,9 +15,9 @@ jobs:
       tag: ${{ steps.calc.outputs.tag }}
       title: ${{ steps.calc.outputs.title }}
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v4
         with:
-          fetch-depth: 0   # need full history for tags
+          fetch-depth: 0
 
       - name: Calculate build number and date
         id: calc
@@ -31,21 +30,34 @@ jobs:
           echo "tag=build-$NEXT-$DATE_TAG" >> "$GITHUB_OUTPUT"
           echo "title=build #$NEXT - $DATE_TITLE" >> "$GITHUB_OUTPUT"
 
-  # Step 2: build on Linux
   build-linux:
     needs: prep
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v4
 
-      - name: Install raylib
+      - name: Install build deps
         run: |
           sudo apt-get update
-          sudo apt-get install -y libraylib-dev
+          sudo apt-get install -y build-essential git cmake \
+            libasound2-dev libx11-dev libxrandr-dev libxi-dev \
+            libgl1-mesa-dev libglu1-mesa-dev libxcursor-dev \
+            libxinerama-dev libwayland-dev libxkbcommon-dev
 
-      - name: Build
+      - name: Build raylib from source
         run: |
-          g++ main.cpp -o game-linux -O2 -lraylib -lGL -lm -lpthread -ldl -lrt -lX11
+          git clone --depth 1 --branch 5.5 https://github.com/raysan5/raylib.git
+          cd raylib
+          mkdir build && cd build
+          cmake -DBUILD_SHARED_LIBS=OFF -DPLATFORM=Desktop ..
+          make -j$(nproc)
+          sudo make install
+          sudo ldconfig
+
+      - name: Build game
+        run: |
+          g++ main.cpp -o game-linux -O2 \
+            -lraylib -lGL -lm -lpthread -ldl -lrt -lX11
 
       - name: Package
         run: |
@@ -58,19 +70,21 @@ jobs:
           name: game-linux
           path: game-linux.zip
 
-  # Step 3: build on macOS
   build-macos:
     needs: prep
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v4
 
       - name: Install raylib
         run: brew install raylib
 
-      - name: Build
+      - name: Build game
         run: |
-          clang++ main.cpp -o game-macos -O2 -lraylib \
+          clang++ main.cpp -o game-macos -O2 \
+            -I$(brew --prefix raylib)/include \
+            -L$(brew --prefix raylib)/lib \
+            -lraylib \
             -framework OpenGL -framework Cocoa -framework IOKit -framework CoreVideo
 
       - name: Package
@@ -79,27 +93,26 @@ jobs:
           cp game-macos dist/
           cd dist && zip -r ../game-macos.zip .
 
-      - uses: actions/upload-artifact@v6
+      - uses: actions/upload-artifact@v4
         with:
           name: game-macos
           path: game-macos.zip
 
-  # Step 4: create release, tag, attach files
   release:
     needs: [prep, build-linux, build-macos]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
       - name: Download Linux build
-        uses: actions/download-artifact@v6
+        uses: actions/download-artifact@v4
         with:
           name: game-linux
 
       - name: Download macOS build
-        uses: actions/download-artifact@v6
+        uses: actions/download-artifact@v4
         with:
           name: game-macos
 
@@ -109,7 +122,7 @@ jobs:
           git push origin "${{ needs.prep.outputs.tag }}"
 
       - name: Create release
-        uses: softprops/action-gh-release@v3
+        uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ needs.prep.outputs.tag }}
           name: ${{ needs.prep.outputs.title }}
