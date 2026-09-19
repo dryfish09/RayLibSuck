@@ -6,12 +6,12 @@ int main() {
     constexpr float ballRange = 60;
     // init windows
     InitWindow(windowX, windowY, "Ball's tiny world 2D");
-    // set target fps, 30 is good for mobile compiler
-    SetTargetFPS(30);
+    // set target fps
+    SetTargetFPS(60);
     // create a ball:
     Vector2 ballPos = {30, 40};
     // ishowspeed, lol, it's speed
-    float speed = 3.5f; // chill
+    float speed = 4.0f; // chill
     while (!WindowShouldClose()) {
         // move ball with arrows
         if (IsKeyDown(KEY_RIGHT)) {
@@ -44,10 +44,10 @@ int main() {
         }
         // draw it!
         BeginDrawing();
-        ClearBackground(WHITE);
+        ClearBackground(GREEN);
         // draw a circle
-        DrawCircleV(ballPos, ballRange, GREEN);
-        DrawText("Use Arrow keys to move!", 20, 20, 20, BLACK);
+        DrawCircleV(ballPos, ballRange, GOLD);
+        DrawText("Use arrow keys to move!", 20, 20, 20, BLACK);
         EndDrawing();
     }
     // only close window when it should close
