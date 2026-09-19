@@ -1,9 +1,9 @@
 #include "raylib.h"
 
 int main() {
-    int windowX = 800;
-    int windowY = 700;
-    float ballRange = 60;
+    constexpr int windowX = 800;
+    constexpr int windowY = 700;
+    constexpr float ballRange = 60;
     // init windows
     InitWindow(windowX, windowY, "Ball's tiny world 2D");
     // set target fps, 30 is good for mobile compiler
@@ -14,7 +14,6 @@ int main() {
     float speed = 3.5f; // chill
     while (!WindowShouldClose()) {
         // move ball with arrows
-        // IsKeyPressed for one move at a time
         if (IsKeyDown(KEY_RIGHT)) {
             // right: use <entityPos>.x += speed;
             ballPos.x += speed;
