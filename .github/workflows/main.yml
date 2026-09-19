@@ -143,7 +143,7 @@ jobs:
           git push origin "${{ needs.prep.outputs.tag }}"
 
       - name: Create release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           tag_name: ${{ needs.prep.outputs.tag }}
           name: ${{ needs.prep.outputs.title }}
