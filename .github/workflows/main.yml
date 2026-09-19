@@ -1,0 +1,119 @@
+name: Build and Release
+
+on:
+  push:
+    branches: [ main ]
+
+permissions:
+  contents: write
+
+jobs:
+  # Step 1: figure out build number + date (Linux runner, once)
+  prep:
+    runs-on: ubuntu-latest
+    outputs:
+      build_number: ${{ steps.calc.outputs.build_number }}
+      tag: ${{ steps.calc.outputs.tag }}
+      title: ${{ steps.calc.outputs.title }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0   # need full history for tags
+
+      - name: Calculate build number and date
+        id: calc
+        run: |
+          COUNT=$(git tag -l "build-*" | wc -l)
+          NEXT=$((COUNT + 1))
+          DATE_TAG=$(date +%d%m%y)
+          DATE_TITLE=$(date +%d-%m-%y)
+          echo "build_number=$NEXT" >> "$GITHUB_OUTPUT"
+          echo "tag=build-$NEXT-$DATE_TAG" >> "$GITHUB_OUTPUT"
+          echo "title=build #$NEXT - $DATE_TITLE" >> "$GITHUB_OUTPUT"
+
+  # Step 2: build on Linux
+  build-linux:
+    needs: prep
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Install raylib
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libraylib-dev
+
+      - name: Build
+        run: |
+          g++ main.cpp -o game-linux -O2 -lraylib -lGL -lm -lpthread -ldl -lrt -lX11
+
+      - name: Package
+        run: |
+          mkdir -p dist
+          cp game-linux dist/
+          cd dist && zip -r ../game-linux.zip .
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: game-linux
+          path: game-linux.zip
+
+  # Step 3: build on macOS
+  build-macos:
+    needs: prep
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Install raylib
+        run: brew install raylib
+
+      - name: Build
+        run: |
+          clang++ main.cpp -o game-macos -O2 -lraylib \
+            -framework OpenGL -framework Cocoa -framework IOKit -framework CoreVideo
+
+      - name: Package
+        run: |
+          mkdir -p dist
+          cp game-macos dist/
+          cd dist && zip -r ../game-macos.zip .
+
+      - uses: actions/upload-artifact@v6
+        with:
+          name: game-macos
+          path: game-macos.zip
+
+  # Step 4: create release, tag, attach files
+  release:
+    needs: [prep, build-linux, build-macos]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Download Linux build
+        uses: actions/download-artifact@v6
+        with:
+          name: game-linux
+
+      - name: Download macOS build
+        uses: actions/download-artifact@v6
+        with:
+          name: game-macos
+
+      - name: Create tag
+        run: |
+          git tag "${{ needs.prep.outputs.tag }}"
+          git push origin "${{ needs.prep.outputs.tag }}"
+
+      - name: Create release
+        uses: softprops/action-gh-release@v3
+        with:
+          tag_name: ${{ needs.prep.outputs.tag }}
+          name: ${{ needs.prep.outputs.title }}
+          files: |
+            game-linux.zip
+            game-macos.zip
+          generate_release_notes: true
