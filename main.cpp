@@ -54,6 +54,8 @@ int main() {
     // only close window when it should close
     if (WindowShouldClose()) {
         CloseWindow();
+    } else {
+        CloseWindow(); // :)
     }
     return 0;
 }
