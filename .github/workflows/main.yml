@@ -49,15 +49,17 @@ jobs:
           git clone --depth 1 --branch 5.5 https://github.com/raysan5/raylib.git
           cd raylib
           mkdir build && cd build
-          cmake -DBUILD_SHARED_LIBS=OFF -DPLATFORM=Desktop ..
+          cmake -DBUILD_SHARED_LIBS=OFF -DPLATFORM=Desktop \
+            -DCMAKE_BUILD_TYPE=Release ..
           make -j$(nproc)
           sudo make install
           sudo ldconfig
 
       - name: Build game
         run: |
-          g++ main.cpp -o game-linux -O2 \
-            -lraylib -lGL -lm -lpthread -ldl -lrt -lX11
+          cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+          cmake --build build -j$(nproc)
+          cp build/game game-linux
           echo "=== build done ==="
           ls -la game-linux
           file game-linux
@@ -87,19 +89,17 @@ jobs:
           cd raylib
           mkdir build && cd build
           cmake -DBUILD_SHARED_LIBS=OFF -DPLATFORM=Desktop \
+            -DCMAKE_BUILD_TYPE=Release \
             -DCMAKE_INSTALL_PREFIX=/usr/local ..
           make -j$(sysctl -n hw.ncpu)
           sudo make install
-          echo "=== raylib installed ==="
           ls -la /usr/local/lib/libraylib.a
 
       - name: Build game
         run: |
-          clang++ main.cpp -o game-macos -O2 \
-            -I/usr/local/include \
-            -L/usr/local/lib \
-            -lraylib \
-            -framework OpenGL -framework Cocoa -framework IOKit -framework CoreVideo
+          cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+          cmake --build build -j$(sysctl -n hw.ncpu)
+          cp build/game game-macos
           echo "=== build done ==="
           ls -la game-macos
           file game-macos
