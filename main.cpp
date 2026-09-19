@@ -4,12 +4,14 @@ int main() {
     constexpr int windowX = 800;
     constexpr int windowY = 700;
     constexpr float ballRange = 60;
+    constexpr int coinRange = 15;
     // init windows
     InitWindow(windowX, windowY, "Ball's tiny world 2D");
     // set target fps, 30 is good for mobile compiler
     SetTargetFPS(30);
     // create a ball:
     Vector2 ballPos = {30, 40};
+    Vector2 coinPos = {0, 0};
     // ishowspeed, lol, it's speed
     float speed = 3.5f; // chill
     while (!WindowShouldClose()) {
