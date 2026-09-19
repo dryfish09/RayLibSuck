@@ -37,13 +37,13 @@ int main() {
             ballPos.x = ballRange;
         }
         if (ballPos.x + wall >= 800) {
-            ballPos.x = wall + ballRange;
+            ballPos.x = windowsX - ballRange;
         }
         if (ballPos.y - wall <= 0) {
             ballPos.y = ballRange;
         }
         if (ballPos.y + wall >= 700) {
-            ballPos.y = ballRange;
+            ballPos.y = windowsY - ballRange;
         }
         // draw it!
         BeginDrawing();
