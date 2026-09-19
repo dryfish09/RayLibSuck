@@ -52,10 +52,6 @@ int main() {
         EndDrawing();
     }
     // only close window when it should close
-    if (WindowShouldClose()) {
-        CloseWindow();
-    } else {
-        CloseWindow(); // :)
-    }
+    CloseWindow();
     return 0;
 }
