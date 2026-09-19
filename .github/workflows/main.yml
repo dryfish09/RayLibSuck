@@ -73,7 +73,7 @@ jobs:
           zip -r game-linux.zip game-linux
           ls -la game-linux.zip
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: game-linux
           path: game-linux.zip
@@ -113,7 +113,7 @@ jobs:
           zip -r game-macos.zip game-macos
           ls -la game-macos.zip
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: game-macos
           path: game-macos.zip
