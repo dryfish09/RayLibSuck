@@ -50,7 +50,11 @@ int main() {
         ClearBackground(WHITE);
         // draw a circle
         DrawCircleV(ballPos, ballRange, GREEN);
+        // draw coin
         DrawCircleV(coinPos, coinRange, GOLD);
+        // random position, i'll use C style casting because idk other way
+        coinPos.x = (float)GetRandomValue(coinRange, windowX - coinRange);
+        coinPos.y = (float)GetRandomValue(coinRange, windowY - coinRange);
         DrawText("Use Arrow keys to move!", 20, 20, 20, BLACK);
         EndDrawing();
     }
