@@ -58,12 +58,14 @@ jobs:
         run: |
           g++ main.cpp -o game-linux -O2 \
             -lraylib -lGL -lm -lpthread -ldl -lrt -lX11
+          echo "=== build done ==="
+          ls -la game-linux
+          file game-linux
 
       - name: Package
         run: |
-          mkdir -p dist
-          cp game-linux dist/
-          cd dist && zip -r ../game-linux.zip .
+          zip -r game-linux.zip game-linux
+          ls -la game-linux.zip
 
       - uses: actions/upload-artifact@v4
         with:
@@ -76,22 +78,36 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install raylib
-        run: brew install raylib
+      - name: Install cmake
+        run: brew install cmake
+
+      - name: Build raylib from source
+        run: |
+          git clone --depth 1 --branch 5.5 https://github.com/raysan5/raylib.git
+          cd raylib
+          mkdir build && cd build
+          cmake -DBUILD_SHARED_LIBS=OFF -DPLATFORM=Desktop \
+            -DCMAKE_INSTALL_PREFIX=/usr/local ..
+          make -j$(sysctl -n hw.ncpu)
+          sudo make install
+          echo "=== raylib installed ==="
+          ls -la /usr/local/lib/libraylib.a
 
       - name: Build game
         run: |
           clang++ main.cpp -o game-macos -O2 \
-            -I$(brew --prefix raylib)/include \
-            -L$(brew --prefix raylib)/lib \
+            -I/usr/local/include \
+            -L/usr/local/lib \
             -lraylib \
             -framework OpenGL -framework Cocoa -framework IOKit -framework CoreVideo
+          echo "=== build done ==="
+          ls -la game-macos
+          file game-macos
 
       - name: Package
         run: |
-          mkdir -p dist
-          cp game-macos dist/
-          cd dist && zip -r ../game-macos.zip .
+          zip -r game-macos.zip game-macos
+          ls -la game-macos.zip
 
       - uses: actions/upload-artifact@v4
         with:
