@@ -11,6 +11,7 @@ int main() {
     SetTargetFPS(30);
     // create a ball:
     Vector2 ballPos = {30, 40};
+    // coin
     Vector2 coinPos = {0, 0};
     // ishowspeed, lol, it's speed
     float speed = 3.5f; // chill
@@ -49,6 +50,7 @@ int main() {
         ClearBackground(WHITE);
         // draw a circle
         DrawCircleV(ballPos, ballRange, GREEN);
+        DrawCircleV(coinPos, coinRange, GOLD);
         DrawText("Use Arrow keys to move!", 20, 20, 20, BLACK);
         EndDrawing();
     }
