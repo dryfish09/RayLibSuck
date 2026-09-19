@@ -9,6 +9,8 @@ int main() {
     Vector2 ballPos = {30, 40};
     // ishowspeed, lol, it's speed
     float speed = 3.5f; // chill
+    // wall to prevent player go out of screen, try to use constexpr
+    constexpr int wall = 5;
     while (!WindowShouldClose()) {
         // move ball with arrows
         // IsKeyPressed for one move at a time
@@ -16,16 +18,29 @@ int main() {
             // right: use <entityPos>.x += speed;
             ballPos.x += speed;
         }
-        else if (IsKeyDown(KEY_LEFT)) {
+        if (IsKeyDown(KEY_LEFT)) {
             // left: like right, but is <entityPos>.x -= speed;
             ballPos.x -= speed;
         }
-        else if (IsKeyDown(KEY_DOWN)) {
+        if (IsKeyDown(KEY_DOWN)) {
             // right: <entityPos>.y += speed;
             ballPos.y += speed;
         }
-        else if (IsKeyDown(KEY_UP)) {
+        if (IsKeyDown(KEY_UP)) {
             ballPos.y -= speed;
+        }
+        // wall
+        if (ballPos.x - wall <= 0) {
+            ballPos.x = wall;
+        }
+        if (ballPos.x + wall >= 800) {
+            ballPos.x = wall;
+        }
+        if (ballPos.y - wall <= 0) {
+            ballPos.y = wall;
+        }
+        if (ballPos.y + wall >= 700) {
+            ballPos.y = wall;
         }
         // draw it!
         BeginDrawing();
