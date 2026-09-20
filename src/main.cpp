@@ -6,6 +6,9 @@ int main() {
     constexpr float ballRange = 60;
     // init windows
     InitWindow(windowX, windowY, "Ball's tiny world 2D");
+    // init sound:
+    InitAudioDevice();
+    Sound footstepSound = LoadSound("./assets/sound/walkSound.wav");
     // set target fps
     SetTargetFPS(60);
     // create a ball:
@@ -50,7 +53,9 @@ int main() {
         DrawText("Use arrow keys to move!", 20, 20, 20, BLACK);
         EndDrawing();
     }
-    // only close window when it should close
+    // close sound:
+    CloseAudioDevice();
+    // close windows
     CloseWindow();
     return 0;
 }
