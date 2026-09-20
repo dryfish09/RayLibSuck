@@ -26,3 +26,8 @@ if(APPLE)
         "-framework CoreFoundation"
     )
 endif()
+
+if(WIN32)
+    target_link_options(game PRIVATE -static)
+    target_link_libraries(game PRIVATE winmm gdi32 opengl32)
+endif()
