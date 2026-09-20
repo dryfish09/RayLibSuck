@@ -1,4 +1,4 @@
-#include "raylib"
+#include "raylib.h"
 
 
 void loadFootstepSound() {
