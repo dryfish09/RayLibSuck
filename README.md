@@ -4,13 +4,22 @@
 
 ### What's it:
 This is my first game, written in C++ with Raylib
-### How to run app on Linux 
+### How to run app on Linux or MacOS
+#### Linux:
 Linux requires you need to give it a **run permission**. 
 - Install from Releases tab, choose `game-linux.zip`
 - unzip it
 - run `run.sh` by run these command on terminal:
 ```bash
 bash ./run.sh
+```
+#### MacOS:
+MacOS also requests you need to give it **run permission**.
+- Install from Releases tab, choose `game-macos.zip`
+- unzip it
+- run `run-macos.sh` by run these command on terminal:
+```bash
+bash ./run-macos.sh
 ```
 
 ### How to play:
