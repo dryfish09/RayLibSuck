@@ -49,7 +49,7 @@ jobs:
 
       - name: Build raylib from source
         run: |
-          git clone --depth 1 --branch 5.5 https://github.com/raysan5/raylib.git
+          git clone --depth 1 --branch 6.0 https://github.com/raysan5/raylib.git
           cd raylib
           mkdir build && cd build
           cmake -DBUILD_SHARED_LIBS=OFF -DPLATFORM=Desktop \
@@ -88,7 +88,7 @@ jobs:
 
       - name: Build raylib from source
         run: |
-          git clone --depth 1 --branch 5.5 https://github.com/raysan5/raylib.git
+          git clone --depth 1 --branch 6.0 https://github.com/raysan5/raylib.git
           cd raylib
           mkdir build && cd build
           cmake -DBUILD_SHARED_LIBS=OFF -DPLATFORM=Desktop \
@@ -141,7 +141,7 @@ jobs:
 
       - name: Build raylib from source
         run: |
-          git clone --depth 1 --branch 5.5 https://github.com/raysan5/raylib.git
+          git clone --depth 1 --branch 6.0 https://github.com/raysan5/raylib.git
           cd raylib
           mkdir build && cd build
           cmake -G Ninja \
