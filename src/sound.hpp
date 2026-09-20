@@ -6,7 +6,7 @@ namespace sound {
     inline Sound footstep;
 
     inline void loadFootstepSound() {
-        footstep = LoadSound("./assets/sound/walkSound.wav");
+        footstep = LoadSound("src/assets/sound/walkSound.wav");
     }
 
     inline void playFootstepSound() {
