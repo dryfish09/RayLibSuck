@@ -14,7 +14,7 @@ Linux requires you need to give it a **run permission**.
 bash ./run.sh
 ```
 #### MacOS:
-MacOS also requests you need to give it **run permission**.
+MacOS also requires you need to give it **run permission**.
 - Install from Releases tab, choose `game-macos.zip`
 - unzip it
 - run `run-macos.sh` by run these command on terminal:
