@@ -15,7 +15,7 @@ int main() {
     // create a ball:
     Vector2 ballPos = {30, 40};
     // ishowspeed, lol, it's speed
-    constexpr float speed = 9.0f; // not chill
+    constexpr float speed = 5.3f; // not chill
     while (!WindowShouldClose()) {
         // move ball with arrows
         if (IsKeyPressed(KEY_RIGHT) || IsKeyPressed(KEY_D)) {
@@ -50,6 +50,21 @@ int main() {
         }
         if (ballPos.y + ballRange >= windowY) {
             ballPos.y = windowY - ballRange;
+        }
+        if (IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_D)) {
+            // right: use <entityPos>.x += speed;
+            ballPos.x += speed;
+        }
+        if (IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_A)) {
+            // left: like right, but is <entityPos>.x -= speed;
+            ballPos.x -= speed;
+        }
+        if (IsKeyDown(KEY_DOWN) || IsKeyDown(KEY_S)) {
+            // down: <entityPos>.y += speed;
+            ballPos.y += speed;
+        }
+        if (IsKeyDown(KEY_UP) || IsKeyDown(KEY_W)) {
+            ballPos.y -= speed;
         }
         // draw it!
         BeginDrawing();
