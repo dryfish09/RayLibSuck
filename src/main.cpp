@@ -15,7 +15,7 @@ int main() {
     // create a ball:
     Vector2 ballPos = {30, 40};
     // ishowspeed, lol, it's speed
-    constexpr float speed = 9.0f; // not chill
+    constexpr float speed = 5.3f; // not chill
     while (!WindowShouldClose()) {
         // move ball with arrows
         if (IsKeyPressed(KEY_RIGHT) || IsKeyPressed(KEY_D)) {
