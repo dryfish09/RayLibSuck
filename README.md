@@ -1,11 +1,13 @@
 # Ball's 2D World
 
-[![Build and Release](https://github.com/dryfish09/blaa2dg/actions/workflows/main.yml/badge.svg)](https://github.com/dryfish09/blaa2dg/actions/workflows/main.yml)
+[![Build and Release](https://github.com/dryfish09/ballGame2d/actions/workflows/main.yml/badge.svg)](https://github.com/dryfish09/ballGame2d/actions/workflows/main.yml)
 
-### What's it:
-This is my first game, written in C++ with Raylib
-### How to run app on Linux or MacOS
-#### Linux:
+## What's it:
+This is my first game, written in C++ with Raylib.
+
+You're Ball, a small yellow ball, it lives in a tiny green world that has 3 flowers.
+## How to run app on Linux or MacOS
+### Linux:
 Linux requires you need to give it a **run permission**. 
 - Install from Releases tab, choose `game-linux.zip`
 - unzip it
@@ -13,7 +15,7 @@ Linux requires you need to give it a **run permission**.
 ```bash
 bash ./run.sh
 ```
-#### MacOS:
+### MacOS:
 MacOS also requires you need to give it **run permission**.
 - Install from Releases tab, choose `game-macos.zip`
 - unzip it
@@ -22,8 +24,8 @@ MacOS also requires you need to give it **run permission**.
 bash ./run-macos.sh
 ```
 
-### How to play:
-Use arrow keys or WASD keys on your keyboard to move, you can't move out of screen.
+## How to play:
+Use arrow keys or WASD keys on your keyboard to move, you can't move out of screen
 
 > [!NOTE]
 > Because I just learning raylib now, so code maybe is not best practise, too simple,... So if you like this game, pls help me improve it by open an issue!!!
@@ -36,4 +38,9 @@ Use arrow keys or WASD keys on your keyboard to move, you can't move out of scre
 - [ ] make game chaotic with bugs and fps bellow 10
 - [ ] delete this repository
 
-Made with :fish: by dryfish09, thanks raylib author and contributor for bringing a awesome library to life!
+## Credit:
+- This repository uses an awesome graphic library named RayLib, created by RayLib's author and contributors
+- Sound: this repository uses sounds/images/textures from itch.io, thanks its author very much to help me complete this game by their free assets
+- Main developer: [@dryfish09](https://github.com/dryfish09)
+
+Made with 🐟 by dryfish09, thanks RayLib author and contributor for bringing a awesome library to life!
