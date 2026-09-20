@@ -8,7 +8,6 @@ if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
     set(CMAKE_BUILD_TYPE Release CACHE STRING "" FORCE)
 endif()
 
-# --- try system raylib first, otherwise fetch it ---
 find_package(raylib 5.5 QUIET)
 
 if(raylib_FOUND)
@@ -19,12 +18,22 @@ else()
     FetchContent_Declare(
         raylib
         GIT_REPOSITORY https://github.com/raysan5/raylib.git
-        GIT_TAG        6.0
+        GIT_TAG        5.5
         GIT_SHALLOW    TRUE
     )
     FetchContent_MakeAvailable(raylib)
 endif()
 
-# --- your game ---
 add_executable(game src/main.cpp)
 target_link_libraries(game PRIVATE raylib)
+
+if(APPLE)
+    target_link_libraries(game PRIVATE
+        "-framework Cocoa"
+        "-framework IOKit"
+        "-framework CoreVideo"
+        "-framework CoreFoundation"
+        "-framework CoreGraphics"
+        "-framework OpenGL"
+    )
+endif()
