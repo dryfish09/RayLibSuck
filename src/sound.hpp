@@ -1,9 +1,9 @@
 #include "raylib"
-#include <string>
+
 
 void loadFootstepSound() {
     Sound footstep = LoadSound("./assets/sound/walkSound.wav");
 }
-void unloadAllDeclaredSound() {
+void unloadDeclaredSound() {
     UnloadSound(footstep);
 }
