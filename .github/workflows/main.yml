@@ -69,7 +69,7 @@ jobs:
 
       - name: Package
         run: |
-          zip -r game-linux.zip game-linux assets/
+          zip -r game-linux.zip game-linux src/assets/
           ls -la game-linux.zip
 
       - uses: actions/upload-artifact@v7
@@ -109,7 +109,7 @@ jobs:
 
       - name: Package
         run: |
-          zip -r game-macos.zip game-macos assets/
+          zip -r game-macos.zip game-macos src/assets/
           ls -la game-macos.zip
 
       - uses: actions/upload-artifact@v7
@@ -163,7 +163,7 @@ jobs:
 
       - name: Package
         run: |
-          zip -r game-windows.zip game-windows.exe assets/
+          zip -r game-windows.zip game-windows.exe src/assets/
           ls -la game-windows.zip
 
       - uses: actions/upload-artifact@v7
