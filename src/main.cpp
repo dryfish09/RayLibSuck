@@ -22,21 +22,21 @@ int main() {
             // right: use <entityPos>.x += speed;
             ballPos.x += speed;
             // play sound
-            PlaySound(footstepSound);
+            playFootstepSound();
         }
         if (IsKeyDown(KEY_LEFT)) {
             // left: like right, but is <entityPos>.x -= speed;
             ballPos.x -= speed;
-            PlaySound(footstepSound);
+            playFootstepSound();
         }
         if (IsKeyDown(KEY_DOWN)) {
             // down: <entityPos>.y += speed;
             ballPos.y += speed;
-            PlaySound(footstepSound);
+            playFootstepSound();
         }
         if (IsKeyDown(KEY_UP)) {
             ballPos.y -= speed;
-            PlaySound(footstepSound);
+            playFootstepSound();
         }
         // prevent player go out of screen
         if (ballPos.x - ballRange <= 0) {
