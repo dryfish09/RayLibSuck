@@ -1,12 +1,20 @@
+#pragma once
 #include "raylib.h"
 
+namespace sound {
 
-void loadFootstepSound() {
-    Sound footstep = LoadSound("./assets/sound/walkSound.wav");
-}
-void playFootstepSound() {
-    PlaySound(footstep);
-}
-void unloadDeclaredSound() {
-    UnloadSound(footstep);
+    inline Sound footstep;
+
+    inline void loadFootstepSound() {
+        footstep = LoadSound("assets/sound/walkSound.wav");
+    }
+
+    inline void playFootstepSound() {
+        PlaySound(footstep);
+    }
+
+    inline void unloadFootstepSound() {
+        UnloadSound(footstep);
+    }
+
 }
