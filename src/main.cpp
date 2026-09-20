@@ -21,6 +21,10 @@ int main() {
     Vector2 flowerPos3 = {0, 0};
     flowerPos.x = (int)GetRandomValue(flowerRange, windowX - flowerRange);
     flowerPos.y = (int)GetRandomValue(flowerRange, windowY - flowerRange);
+    flowerPos2.x = (int)GetRandomValue(flowerRange, windowX - flowerRange);
+    flowerPos2.y = (int)GetRandomValue(flowerRange, windowY - flowerRange);
+    flowerPos3.x = (int)GetRandomValue(flowerRange, windowX - flowerRange);
+    flowerPos3.y = (int)GetRandomValue(flowerRange, windowY - flowerRange);
     // ishowspeed, lol, it's speed
     constexpr float speed = 5.3f; // not chill
     while (!WindowShouldClose()) {
