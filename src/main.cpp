@@ -87,8 +87,8 @@ int main() {
         // draw some circle
         DrawCircleV(ballPos, ballRange, GOLD);
         DrawCircleV(flowerPos, flowerRange, RED);
-        DrawCircleV(flowerPos1, flowerRange, GOLD);
-        DrawCircleV(flowerPos2, flowerRange, WHITE);
+        DrawCircleV(flowerPos2, flowerRange, GOLD);
+        DrawCircleV(flowerPos3, flowerRange, WHITE);
         DrawText("Use arrow keys or WASD to move!", 20, 20, 20, BLACK);
         EndDrawing();
     }
@@ -99,3 +99,4 @@ int main() {
     CloseWindow();
     return 0;
 }
+
