@@ -37,3 +37,7 @@ if(APPLE)
         "-framework OpenGL"
     )
 endif()
+
+if(WIN32)
+    target_link_libraries(game PRIVATE winmm)
+endif()
