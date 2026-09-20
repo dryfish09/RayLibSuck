@@ -1,5 +1,5 @@
 #include "raylib.h"
-#include "sound.hpp"
+#include "./sound.hpp"
 
 int main() {
     constexpr int windowX = 800;
