@@ -13,7 +13,7 @@ Use arrow keys or WASD keys on your keyboard to move, you can't move out of scre
 ### Roadmap
 - [x] basic program like a "game"
 - [x] add sound
-- [ ] add more sounds
+- [x] add more sounds
 - [ ] add textures
 - [ ] add more textures
 - [ ] make game chaotic with bugs and fps bellow 10
