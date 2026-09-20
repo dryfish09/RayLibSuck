@@ -13,13 +13,13 @@ namespace sound {
         run = LoadSound("src/assets/sound/run.wav");
     }
     inline void playRunSound() {
-        if (!IsSoundPlaying(run) || !IsSoundPlaying(footstep)) {
+        if (!IsSoundPlaying(run) && !IsSoundPlaying(footstep)) {
             PlaySound(run);
         }
     }
 
     inline void playFootstepSound() {
-        if (!IsSoundPlaying(run) || !IsSoundPlaying(footstep)) {
+        if (!IsSoundPlaying(run) && !IsSoundPlaying(footstep)) {
             PlaySound(footstep);
         }
     }
