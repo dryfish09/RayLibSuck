@@ -72,7 +72,7 @@ jobs:
 
       - name: Package
         run: |
-          zip -r game-linux.zip game-linux src/assets/
+          zip -r game-linux.zip game-linux src/assets/ run.sh
           ls -la game-linux.zip
 
       - uses: actions/upload-artifact@v7

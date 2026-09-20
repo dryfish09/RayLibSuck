@@ -4,6 +4,15 @@
 
 ### What's it:
 This is my first game, written in C++ with Raylib
+### How to run app on Linux 
+Linux requires you need to give it a **run permission**. 
+- Install from Releases tab, choose `game-linux.zip`
+- unzip it
+- run `run.sh` by run these command on terminal:
+```bash
+sudo apt-get install bash
+bash ./run.sh
+```
 
 ### How to play:
 Use arrow keys or WASD keys on your keyboard to move, you can't move out of screen.
