@@ -4,7 +4,8 @@
 int main() {
     constexpr int windowX = 800;
     constexpr int windowY = 700;
-    constexpr float ballRange = 60;
+    constexpr float ballRange = 9.5f;
+    constexpr float flowerRange = 7.0f
     // init windows
     InitWindow(windowX, windowY, "Ball's tiny world 2D");
     // init sound:
@@ -15,6 +16,7 @@ int main() {
     SetTargetFPS(60);
     // create a ball:
     Vector2 ballPos = {30, 40};
+    Vector2 flowerPos = {0, 0}
     // ishowspeed, lol, it's speed
     constexpr float speed = 5.3f; // not chill
     while (!WindowShouldClose()) {
@@ -70,11 +72,16 @@ int main() {
             ballPos.y -= speed;
             sound::playRunSound;
         }
+        flowerPos.x = (float)GetRandomValue(flowerRange, windowX - flowerRange);
+        flowerPos.y = (float)GetRandomValue(flowerRange, windowY - flowerRange);
         // draw it!
         BeginDrawing();
         ClearBackground(GREEN);
-        // draw a circle
+        // draw some circle
         DrawCircleV(ballPos, ballRange, GOLD);
+        DrawCircleV(flowerPos, flowerRange, RED);
+        DrawCircleV(flowerPos, flowerRange, GOLD);
+        DrawCircleV(flowerPos, flowerRange, WHITE);
         DrawText("Use arrow keys or WASD to move!", 20, 20, 20, BLACK);
         EndDrawing();
     }
