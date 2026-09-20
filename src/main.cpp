@@ -15,26 +15,26 @@ int main() {
     // create a ball:
     Vector2 ballPos = {30, 40};
     // ishowspeed, lol, it's speed
-    float speed = 4.0f; // chill
+    constexpr float speed = 10f; // not chill
     while (!WindowShouldClose()) {
         // move ball with arrows
-        if (IsKeyDown(KEY_RIGHT)) {
+        if (IsKeyPressed(KEY_RIGHT) || IsKeyPressed(KEY_D)) {
             // right: use <entityPos>.x += speed;
             ballPos.x += speed;
             // play sound
             sound::playFootstepSound();
         }
-        if (IsKeyDown(KEY_LEFT)) {
+        if (IsKeyPressed(KEY_LEFT) || IsKeyPressed(KEY_A)) {
             // left: like right, but is <entityPos>.x -= speed;
             ballPos.x -= speed;
             sound::playFootstepSound();
         }
-        if (IsKeyDown(KEY_DOWN)) {
+        if (IsKeyPressed(KEY_DOWN) || IsKeyPressed(KEY_S)) {
             // down: <entityPos>.y += speed;
             ballPos.y += speed;
             sound::playFootstepSound();
         }
-        if (IsKeyDown(KEY_UP)) {
+        if (IsKeyPressed(KEY_UP) || IsKeyPressed(KEY_W)) {
             ballPos.y -= speed;
             sound::playFootstepSound();
         }
@@ -56,7 +56,7 @@ int main() {
         ClearBackground(GREEN);
         // draw a circle
         DrawCircleV(ballPos, ballRange, GOLD);
-        DrawText("Use arrow keys to move!", 20, 20, 20, BLACK);
+        DrawText("Use arrow keys or WASD to move!", 20, 20, 20, BLACK);
         EndDrawing();
     }
     // close sound:
