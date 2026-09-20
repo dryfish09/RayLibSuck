@@ -5,7 +5,6 @@ on:
     branches: [ main ]
     paths-ignore:
       - '**.md'
-      - '.github/**'
   workflow_dispatch:
 
 permissions:
@@ -118,8 +117,62 @@ jobs:
           name: game-macos
           path: game-macos.zip
 
+  build-windows:
+    needs: prep
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: msys2 {0}
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Setup MSYS2
+        uses: msys2/setup-msys2@v2
+        with:
+          msystem: MINGW64
+          update: true
+          install: >-
+            mingw-w64-x86_64-gcc
+            mingw-w64-x86_64-cmake
+            mingw-w64-x86_64-make
+            mingw-w64-x86_64-ninja
+            git
+            zip
+
+      - name: Build raylib from source
+        run: |
+          git clone --depth 1 --branch 5.5 https://github.com/raysan5/raylib.git
+          cd raylib
+          mkdir build && cd build
+          cmake -G Ninja \
+            -DBUILD_SHARED_LIBS=OFF \
+            -DPLATFORM=Desktop \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_INSTALL_PREFIX=/mingw64 ..
+          ninja
+          ninja install
+
+      - name: Build game
+        run: |
+          cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release
+          cmake --build build
+          cp build/game.exe game-windows.exe
+          echo "=== build done ==="
+          ls -la game-windows.exe
+          file game-windows.exe
+
+      - name: Package
+        run: |
+          zip -r game-windows.zip game-windows.exe
+          ls -la game-windows.zip
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: game-windows
+          path: game-windows.zip
+
   release:
-    needs: [prep, build-linux, build-macos]
+    needs: [prep, build-linux, build-macos, build-windows]
     if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     steps:
@@ -137,6 +190,11 @@ jobs:
         with:
           name: game-macos
 
+      - name: Download Windows build
+        uses: actions/download-artifact@v8
+        with:
+          name: game-windows
+
       - name: Create tag
         run: |
           git tag "${{ needs.prep.outputs.tag }}"
@@ -150,4 +208,5 @@ jobs:
           files: |
             game-linux.zip
             game-macos.zip
+            game-windows.zip
           generate_release_notes: true
