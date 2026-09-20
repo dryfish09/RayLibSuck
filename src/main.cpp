@@ -9,7 +9,7 @@ int main() {
     InitWindow(windowX, windowY, "Ball's tiny world 2D");
     // init sound:
     InitAudioDevice();
-    loadFootstepSound();
+    sound::loadFootstepSound();
     // set target fps
     SetTargetFPS(60);
     // create a ball:
@@ -22,17 +22,17 @@ int main() {
             // right: use <entityPos>.x += speed;
             ballPos.x += speed;
             // play sound
-            playFootstepSound();
+            sound::playFootstepSound();
         }
         if (IsKeyDown(KEY_LEFT)) {
             // left: like right, but is <entityPos>.x -= speed;
             ballPos.x -= speed;
-            playFootstepSound();
+            sound::playFootstepSound();
         }
         if (IsKeyDown(KEY_DOWN)) {
             // down: <entityPos>.y += speed;
             ballPos.y += speed;
-            playFootstepSound();
+            sound::playFootstepSound();
         }
         if (IsKeyDown(KEY_UP)) {
             ballPos.y -= speed;
@@ -60,7 +60,7 @@ int main() {
         EndDrawing();
     }
     // close sound:
-    unloadDeclaredSound();
+    sound::unloadDeclaredSound();
     CloseAudioDevice();
     // close windows
     CloseWindow();
