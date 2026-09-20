@@ -10,6 +10,7 @@ int main() {
     // init sound:
     InitAudioDevice();
     sound::loadFootstepSound();
+    sound::loadRunSound();
     // set target fps
     SetTargetFPS(60);
     // create a ball:
@@ -58,13 +59,16 @@ int main() {
         if (IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_A)) {
             // left: like right, but is <entityPos>.x -= speed;
             ballPos.x -= speed;
+            sound::playRunSound();
         }
         if (IsKeyDown(KEY_DOWN) || IsKeyDown(KEY_S)) {
             // down: <entityPos>.y += speed;
             ballPos.y += speed;
+            sound::playRunSound();
         }
         if (IsKeyDown(KEY_UP) || IsKeyDown(KEY_W)) {
             ballPos.y -= speed;
+            sound::playRunSound;
         }
         // draw it!
         BeginDrawing();

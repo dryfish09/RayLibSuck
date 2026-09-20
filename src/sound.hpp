@@ -4,9 +4,16 @@
 namespace sound {
 
     inline Sound footstep;
+    inline Sound run;
 
     inline void loadFootstepSound() {
         footstep = LoadSound("src/assets/sound/walkSound.wav");
+    }
+    inline void loadRunSound() {
+        run = LoadSound("src/assets/sound/run.wav");
+    }
+    inline void playRunSound() {
+        PlaySound(run);
     }
 
     inline void playFootstepSound() {
@@ -15,6 +22,7 @@ namespace sound {
 
     inline void unloadDeclaredSound() {
         UnloadSound(footstep);
+        UnloadSound(run);
     }
 
 }
