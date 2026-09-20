@@ -36,7 +36,7 @@ int main() {
         }
         if (IsKeyDown(KEY_UP)) {
             ballPos.y -= speed;
-            playFootstepSound();
+            sound::playFootstepSound();
         }
         // prevent player go out of screen
         if (ballPos.x - ballRange <= 0) {
