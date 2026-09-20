@@ -42,7 +42,7 @@ jobs:
       - name: Install build deps
         run: |
           sudo apt-get update
-          sudo apt-get install -y build-essential git cmake \
+          sudo apt-get install -y build-essential git cmake zip \
             libasound2-dev libx11-dev libxrandr-dev libxi-dev \
             libgl1-mesa-dev libglu1-mesa-dev libxcursor-dev \
             libxinerama-dev libwayland-dev libxkbcommon-dev
@@ -69,7 +69,7 @@ jobs:
 
       - name: Package
         run: |
-          zip -r game-linux.zip game-linux
+          zip -r game-linux.zip game-linux assets/
           ls -la game-linux.zip
 
       - uses: actions/upload-artifact@v7
@@ -109,7 +109,7 @@ jobs:
 
       - name: Package
         run: |
-          zip -r game-macos.zip game-macos
+          zip -r game-macos.zip game-macos assets/
           ls -la game-macos.zip
 
       - uses: actions/upload-artifact@v7
@@ -163,7 +163,7 @@ jobs:
 
       - name: Package
         run: |
-          zip -r game-windows.zip game-windows.exe
+          zip -r game-windows.zip game-windows.exe assets/
           ls -la game-windows.zip
 
       - uses: actions/upload-artifact@v7
