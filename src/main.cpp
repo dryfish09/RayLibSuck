@@ -59,6 +59,7 @@ int main() {
         EndDrawing();
     }
     // close sound:
+    UnloadSound(footstepSound);
     CloseAudioDevice();
     // close windows
     CloseWindow();
