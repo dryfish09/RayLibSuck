@@ -10,7 +10,7 @@ Linux requires you need to give it a **run permission**.
 - unzip it
 - run `run.sh` by run these command on terminal:
 ```bash
-apt-get bash
+sudo apt-get install bash
 bash ./run.sh
 ```
 
