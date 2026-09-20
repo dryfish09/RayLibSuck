@@ -51,6 +51,21 @@ int main() {
         if (ballPos.y + ballRange >= windowY) {
             ballPos.y = windowY - ballRange;
         }
+        if (IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_D)) {
+            // right: use <entityPos>.x += speed;
+            ballPos.x += speed;
+        }
+        if (IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_A)) {
+            // left: like right, but is <entityPos>.x -= speed;
+            ballPos.x -= speed;
+        }
+        if (IsKeyDown(KEY_DOWN) || IsKeyDown(KEY_S)) {
+            // down: <entityPos>.y += speed;
+            ballPos.y += speed;
+        }
+        if (IsKeyDown(KEY_UP) || IsKeyDown(KEY_W)) {
+            ballPos.y -= speed;
+        }
         // draw it!
         BeginDrawing();
         ClearBackground(GREEN);
