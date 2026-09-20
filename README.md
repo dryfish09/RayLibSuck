@@ -13,6 +13,7 @@ Use arrow keys on your keyboard to move, you can't move out of screen.
 - [ ] add more sounds
 - [ ] add textures
 - [ ] add more textures
-- [ ] ~~make game chaostic with bugs and fps bellows 10~~
+- [ ] make game chaotic with bugs and fps bellow 10
+- [ ] delete this repository
 
 Made with :fish: by dryfish09, thanks raylib author and contributor for bringing a awesome library to life!
