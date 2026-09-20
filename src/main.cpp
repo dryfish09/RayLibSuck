@@ -1,4 +1,5 @@
 #include "raylib.h"
+#include "sound.hpp"
 
 int main() {
     constexpr int windowX = 800;
@@ -8,7 +9,7 @@ int main() {
     InitWindow(windowX, windowY, "Ball's tiny world 2D");
     // init sound:
     InitAudioDevice();
-    Sound footstepSound = LoadSound("./assets/sound/walkSound.wav");
+    loadFootstepSound();
     // set target fps
     SetTargetFPS(60);
     // create a ball:
@@ -59,7 +60,7 @@ int main() {
         EndDrawing();
     }
     // close sound:
-    UnloadSound(footstepSound);
+    unloadDeclaredSound();
     CloseAudioDevice();
     // close windows
     CloseWindow();
