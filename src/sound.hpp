@@ -13,7 +13,7 @@ namespace sound {
         PlaySound(footstep);
     }
 
-    inline void unloadFootstepSound() {
+    inline void unloadDeclaredSound() {
         UnloadSound(footstep);
     }
 
