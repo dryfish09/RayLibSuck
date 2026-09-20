@@ -17,8 +17,8 @@ int main() {
     // create a ball:
     Vector2 ballPos = {30, 40};
     Vector2 flowerPos = {0, 0};
-    flowerPos.x = (float)GetRandomValue(flowerRange, windowX - flowerRange);
-    flowerPos.y = (float)GetRandomValue(flowerRange, windowY - flowerRange);
+    flowerPos.x = (int)GetRandomValue(flowerRange, windowX - flowerRange);
+    flowerPos.y = (int)GetRandomValue(flowerRange, windowY - flowerRange);
     // ishowspeed, lol, it's speed
     constexpr float speed = 5.3f; // not chill
     while (!WindowShouldClose()) {
@@ -75,8 +75,6 @@ int main() {
             ballPos.y -= speed;
             sound::playRunSound();
         }
-        flowerPos.x = (float)GetRandomValue(flowerRange, windowX - flowerRange);
-        flowerPos.y = (float)GetRandomValue(flowerRange, windowY - flowerRange);
         // draw it!
         BeginDrawing();
         ClearBackground(GREEN);
