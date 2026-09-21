@@ -98,9 +98,9 @@ int main() {
         ClearBackground(GREEN);
         // draw some circle
         DrawCircleV(ballPos, ballRange, GOLD);
-        DrawTextureV(texture::flowerTexture, ballPos, WHITE);
-        DrawTextureV(texture::flowerTexture, ballPos, WHITE);
-        DrawTextureV(texture::flowerTexture, ballPos, WHITE);
+        DrawTextureV(texture::flowerTexture, flowerPos, WHITE);
+        DrawTextureV(texture::flowerTexture, flowerPos2, WHITE);
+        DrawTextureV(texture::flowerTexture, flowerPos3, WHITE);
         DrawText("Use arrow keys or WASD to move!", 20, 20, 20, BLACK);
         EndDrawing();
     }
