@@ -1,8 +1,9 @@
 #pragma once
 #include "raylib.h"
 namespace texture {
+    inline Texture2D flowerTex;
     inline void loadTexture() {
-        inline Texture2D flowerTex = LoadTexture("src/assets/texture/flower.png");
+        flowerTex = LoadTexture("src/assets/texture/flower.png");
     }
     inline void unloadTexture() {
         UnloadTexture(flowerTex);
