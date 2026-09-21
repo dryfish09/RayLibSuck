@@ -1,4 +1,4 @@
 #!/bin/bash
 echo "Running Ball Game linux..."
-chmod +x game-linux
-./game-linux
+chmod +x ballTinyWorld-linux
+./ballTinyWorld-linux
