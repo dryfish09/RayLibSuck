@@ -6,7 +6,6 @@ int main() {
     constexpr int windowX = 800;
     constexpr int windowY = 700;
     constexpr float ballRange = 9.5f;
-    constexpr float flowerRange = 7.0f;
     // init windows
     InitWindow(windowX, windowY, "Ball's tiny world 2D");
     // init sound:
