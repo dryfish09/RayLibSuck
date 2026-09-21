@@ -30,7 +30,7 @@ int main() {
     while (!WindowShouldClose()) {
         float deltaTime = GetFrameTime();
         // move ball with arrows
-        else if (IsKeyPressed(KEY_RIGHT) || IsKeyPressed(KEY_D)) {
+        if (IsKeyPressed(KEY_RIGHT) || IsKeyPressed(KEY_D)) {
             speed = 5.3f;
             // right: use <entityPos>.x += speed;
             ballPos.x += speed * deltaTime;
