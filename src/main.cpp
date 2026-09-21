@@ -30,32 +30,32 @@ int main() {
     while (!WindowShouldClose()) {
         float deltaTime = GetFrameTime();
         // move ball with arrows
-        if (IsKeyPressed(KEY_RIGHT) || IsKeyPressed(KEY_D)) {
+        else if (IsKeyPressed(KEY_RIGHT) || IsKeyPressed(KEY_D)) {
             speed = 5.3f;
             // right: use <entityPos>.x += speed;
             ballPos.x += speed * deltaTime;
             // play sound
             sound::playFootstepSound();
         }
-        if (IsKeyPressed(KEY_LEFT) || IsKeyPressed(KEY_A)) {
+        else if (IsKeyPressed(KEY_LEFT) || IsKeyPressed(KEY_A)) {
             // left: like right, but is <entityPos>.x -= speed;
             speed = 5.3f;
             ballPos.x -= speed * deltaTime;
             sound::playFootstepSound();
         }
-        if (IsKeyPressed(KEY_DOWN) || IsKeyPressed(KEY_S)) {
+        else if (IsKeyPressed(KEY_DOWN) || IsKeyPressed(KEY_S)) {
             // down: <entityPos>.y += speed;
             speed = 5.3f;
             ballPos.y += speed * deltaTime;
             sound::playFootstepSound();
         }
-        if (IsKeyPressed(KEY_UP) || IsKeyPressed(KEY_W)) {
+        else if (IsKeyPressed(KEY_UP) || IsKeyPressed(KEY_W)) {
             speed = 5.3f;
             ballPos.y -= speed * deltaTime;
             sound::playFootstepSound();
         }
         // player will move slower when player hold to move
-        if (IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_D)) {
+        else if (IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_D)) {
             speed = 3.5f;
             // right: use <entityPos>.x += speed;
             ballPos.x += speed * deltaTime;
