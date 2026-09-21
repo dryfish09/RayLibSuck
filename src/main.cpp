@@ -1,5 +1,6 @@
 #include "raylib.h"
 #include "./sound.hpp"
+#include "./texture.hpp"
 
 int main() {
     constexpr int windowX = 800;
@@ -12,6 +13,8 @@ int main() {
     InitAudioDevice();
     sound::loadFootstepSound();
     sound::loadRunSound();
+    //load texture
+    texture::loadTexture();
     // set target fps
     SetTargetFPS(60);
     // create a ball:
@@ -104,6 +107,8 @@ int main() {
     }
     // close sound:
     sound::unloadDeclaredSound();
+    // unload texture
+    texture::unloadTexture()
     CloseAudioDevice();
     // close windows
     CloseWindow();
