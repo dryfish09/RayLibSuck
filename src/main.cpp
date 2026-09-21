@@ -1,17 +1,19 @@
 #include "raylib.h"
 #include "./sound.hpp"
+#include "./texture.hpp"
 
 int main() {
     constexpr int windowX = 800;
     constexpr int windowY = 700;
     constexpr float ballRange = 9.5f;
-    constexpr float flowerRange = 7.0f;
     // init windows
     InitWindow(windowX, windowY, "Ball's tiny world 2D");
     // init sound:
     InitAudioDevice();
     sound::loadFootstepSound();
     sound::loadRunSound();
+    //load texture
+    texture::loadTexture();
     // set target fps
     SetTargetFPS(60);
     // create a ball:
@@ -19,6 +21,7 @@ int main() {
     Vector2 flowerPos = {0, 0};
     Vector2 flowerPos2 = {0, 0};
     Vector2 flowerPos3 = {0, 0};
+    constexpr int flowerRange = 20;
     flowerPos.x = (int)GetRandomValue(flowerRange, windowX - flowerRange);
     flowerPos.y = (int)GetRandomValue(flowerRange, windowY - flowerRange);
     flowerPos2.x = (int)GetRandomValue(flowerRange, windowX - flowerRange);
@@ -96,14 +99,16 @@ int main() {
         ClearBackground(GREEN);
         // draw some circle
         DrawCircleV(ballPos, ballRange, GOLD);
-        DrawCircleV(flowerPos, flowerRange, RED);
-        DrawCircleV(flowerPos2, flowerRange, GOLD);
-        DrawCircleV(flowerPos3, flowerRange, WHITE);
+        DrawTextureV(texture::flowerTexture, flowerPos, WHITE);
+        DrawTextureV(texture::flowerTexture, flowerPos2, WHITE);
+        DrawTextureV(texture::flowerTexture, flowerPos3, WHITE);
         DrawText("Use arrow keys or WASD to move!", 20, 20, 20, BLACK);
         EndDrawing();
     }
     // close sound:
     sound::unloadDeclaredSound();
+    // unload texture
+    texture::unloadTexture();
     CloseAudioDevice();
     // close windows
     CloseWindow();

@@ -33,7 +33,7 @@ Use arrow keys or WASD keys on your keyboard to move, you can't move out of scre
 - [x] basic program like a "game"
 - [x] add sound
 - [x] add more sounds
-- [ ] add textures
+- [x] add textures
 - [ ] add more textures
 - [ ] make game chaotic with bugs and fps bellow 10
 - [ ] delete this repository
