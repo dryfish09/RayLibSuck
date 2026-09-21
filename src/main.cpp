@@ -21,6 +21,7 @@ int main() {
     Vector2 flowerPos = {0, 0};
     Vector2 flowerPos2 = {0, 0};
     Vector2 flowerPos3 = {0, 0};
+    constexpr int flowerRange = 20;
     flowerPos.x = (int)GetRandomValue(flowerRange, windowX - flowerRange);
     flowerPos.y = (int)GetRandomValue(flowerRange, windowY - flowerRange);
     flowerPos2.x = (int)GetRandomValue(flowerRange, windowX - flowerRange);
@@ -107,7 +108,7 @@ int main() {
     // close sound:
     sound::unloadDeclaredSound();
     // unload texture
-    texture::unloadTexture()
+    texture::unloadTexture();
     CloseAudioDevice();
     // close windows
     CloseWindow();
