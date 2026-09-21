@@ -61,19 +61,19 @@ int main() {
             ballPos.x += speed * deltaTime;
             sound::playRunSound();
         }
-        if (IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_A)) {
+        else if (IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_A)) {
             speed = 3.5f;
             // left: like right, but is <entityPos>.x -= speed;
             ballPos.x -= speed * deltaTime;
             sound::playRunSound();
         }
-        if (IsKeyDown(KEY_DOWN) || IsKeyDown(KEY_S)) {
+        else if (IsKeyDown(KEY_DOWN) || IsKeyDown(KEY_S)) {
             speed = 3.5f;
             // down: <entityPos>.y += speed;
             ballPos.y += speed * deltaTime;
             sound::playRunSound();
         }
-        if (IsKeyDown(KEY_UP) || IsKeyDown(KEY_W)) {
+        else if (IsKeyDown(KEY_UP) || IsKeyDown(KEY_W)) {
             speed = 3.5f;
             ballPos.y -= speed * deltaTime;
             sound::playRunSound();
