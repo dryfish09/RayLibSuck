@@ -5,7 +5,7 @@ on:
     branches: '*'
     paths-ignore:
       - '**.md'
-  pull_request: 
+  pull_request:
     branches:
       - 'main'
   workflow_dispatch:
@@ -65,20 +65,20 @@ jobs:
         run: |
           cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
           cmake --build build -j$(nproc)
-          cp build/game game-linux
+          cp build/game ballTinyWorld-linux
           echo "=== build done ==="
-          ls -la game-linux
-          file game-linux
+          ls -la ballTinyWorld-linux
+          file ballTinyWorld-linux
 
       - name: Package
         run: |
-          zip -r game-linux.zip game-linux src/assets/ run.sh
-          ls -la game-linux.zip
+          zip -r ballTinyWorld-linux.zip ballTinyWorld-linux src/assets/ run.sh
+          ls -la ballTinyWorld-linux.zip
 
       - uses: actions/upload-artifact@v7
         with:
-          name: game-linux
-          path: game-linux.zip
+          name: ballTinyWorld-linux
+          path: ballTinyWorld-linux.zip
 
   build-macos:
     needs: prep
@@ -105,20 +105,20 @@ jobs:
         run: |
           cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
           cmake --build build -j$(sysctl -n hw.ncpu)
-          cp build/game game-macos
+          cp build/game ballTinyWorld-macos
           echo "=== build done ==="
-          ls -la game-macos
-          file game-macos
+          ls -la ballTinyWorld-macos
+          file ballTinyWorld-macos
 
       - name: Package
         run: |
-          zip -r game-macos.zip game-macos src/assets/ run-macos.sh
-          ls -la game-macos.zip
+          zip -r ballTinyWorld-macos.zip ballTinyWorld-macos src/assets/ run-macos.sh
+          ls -la ballTinyWorld-macos.zip
 
       - uses: actions/upload-artifact@v7
         with:
-          name: game-macos
-          path: game-macos.zip
+          name: ballTinyWorld-macos
+          path: ballTinyWorld-macos.zip
 
   build-windows:
     needs: prep
@@ -159,20 +159,20 @@ jobs:
         run: |
           cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release
           cmake --build build
-          cp build/game.exe game-windows.exe
+          cp build/game.exe ballTinyWorld-windows.exe
           echo "=== build done ==="
-          ls -la game-windows.exe
-          file game-windows.exe
+          ls -la ballTinyWorld-windows.exe
+          file ballTinyWorld-windows.exe
 
       - name: Package
         run: |
-          zip -r game-windows.zip game-windows.exe src/assets/
-          ls -la game-windows.zip
+          zip -r ballTinyWorld-windows.zip ballTinyWorld-windows.exe src/assets/
+          ls -la ballTinyWorld-windows.zip
 
       - uses: actions/upload-artifact@v7
         with:
-          name: game-windows
-          path: game-windows.zip
+          name: ballTinyWorld-windows
+          path: ballTinyWorld-windows.zip
 
   release:
     needs: [prep, build-linux, build-macos, build-windows]
@@ -186,17 +186,17 @@ jobs:
       - name: Download Linux build
         uses: actions/download-artifact@v8
         with:
-          name: game-linux
+          name: ballTinyWorld-linux
 
       - name: Download macOS build
         uses: actions/download-artifact@v8
         with:
-          name: game-macos
+          name: ballTinyWorld-macos
 
       - name: Download Windows build
         uses: actions/download-artifact@v8
         with:
-          name: game-windows
+          name: ballTinyWorld-windows
 
       - name: Create tag
         run: |
@@ -209,7 +209,7 @@ jobs:
           tag_name: ${{ needs.prep.outputs.tag }}
           name: ${{ needs.prep.outputs.title }}
           files: |
-            game-linux.zip
-            game-macos.zip
-            game-windows.zip
+            ballTinyWorld-linux.zip
+            ballTinyWorld-macos.zip
+            ballTinyWorld-windows.zip
           generate_release_notes: true

@@ -1,3 +1,3 @@
-chmod +x game-macos
-xattr -c game-macos
-./game-macos
+chmod +x ballTinyWorld-macos
+xattr -c ballTinyWorld-macos
+./ballTinyWorld-macos
