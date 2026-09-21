@@ -31,27 +31,27 @@ int main() {
         float deltaTime = GetFrameTime();
         // move ball with arrows
         if (IsKeyPressed(KEY_RIGHT) || IsKeyPressed(KEY_D)) {
+            speed = 5.3f;
             // right: use <entityPos>.x += speed;
             ballPos.x += speed * deltaTime;
-            speed = 5.3f;
             // play sound
             sound::playFootstepSound();
         }
         if (IsKeyPressed(KEY_LEFT) || IsKeyPressed(KEY_A)) {
             // left: like right, but is <entityPos>.x -= speed;
-            ballPos.x -= speed * deltaTime;
             speed = 5.3f;
+            ballPos.x -= speed * deltaTime;
             sound::playFootstepSound();
         }
         if (IsKeyPressed(KEY_DOWN) || IsKeyPressed(KEY_S)) {
             // down: <entityPos>.y += speed;
-            ballPos.y += speed * deltaTime;
             speed = 5.3f;
+            ballPos.y += speed * deltaTime;
             sound::playFootstepSound();
         }
         if (IsKeyPressed(KEY_UP) || IsKeyPressed(KEY_W)) {
-            ballPos.y -= speed * deltaTime;
             speed = 5.3f;
+            ballPos.y -= speed * deltaTime;
             sound::playFootstepSound();
         }
         if (IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_D)) {
