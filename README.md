@@ -9,7 +9,7 @@ You're Ball, a small yellow ball, it lives in a tiny green world that has 3 flow
 ## How to run app on Linux or MacOS
 ### Linux:
 Linux requires you need to give it a **run permission**. 
-- Install from Releases tab, choose `game-linux.zip`
+- Install from Releases tab, choose `ballTinyWorld-linux.zip`
 - unzip it
 - run `run.sh` by run these command on terminal:
 ```bash
@@ -17,7 +17,7 @@ bash ./run.sh
 ```
 ### MacOS:
 MacOS also requires you need to give it **run permission**.
-- Install from Releases tab, choose `game-macos.zip`
+- Install from Releases tab, choose `ballTinyWorld-macos.zip`
 - unzip it
 - run `run-macos.sh` by run these command on terminal:
 ```bash
