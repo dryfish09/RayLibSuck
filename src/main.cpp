@@ -26,29 +26,56 @@ int main() {
     flowerPos3.x = (int)GetRandomValue(flowerRange, windowX - flowerRange);
     flowerPos3.y = (int)GetRandomValue(flowerRange, windowY - flowerRange);
     // ishowspeed, lol, it's speed
-    constexpr float speed = 5.3f; // not chill
+    float speed = 5.3f; // not chill
     while (!WindowShouldClose()) {
         float deltaTime = GetFrameTime();
         // move ball with arrows
         if (IsKeyPressed(KEY_RIGHT) || IsKeyPressed(KEY_D)) {
             // right: use <entityPos>.x += speed;
             ballPos.x += speed * deltaTime;
+            speed = 5.3f;
             // play sound
             sound::playFootstepSound();
         }
         if (IsKeyPressed(KEY_LEFT) || IsKeyPressed(KEY_A)) {
             // left: like right, but is <entityPos>.x -= speed;
             ballPos.x -= speed * deltaTime;
+            speed = 5.3f;
             sound::playFootstepSound();
         }
         if (IsKeyPressed(KEY_DOWN) || IsKeyPressed(KEY_S)) {
             // down: <entityPos>.y += speed;
             ballPos.y += speed * deltaTime;
+            speed = 5.3f;
             sound::playFootstepSound();
         }
         if (IsKeyPressed(KEY_UP) || IsKeyPressed(KEY_W)) {
             ballPos.y -= speed * deltaTime;
+            speed = 5.3f;
             sound::playFootstepSound();
+        }
+        if (IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_D)) {
+            // right: use <entityPos>.x += speed;
+            ballPos.x += speed * deltaTime;
+            speed = 3.5f;
+            sound::playRunSound();
+        }
+        if (IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_A)) {
+            // left: like right, but is <entityPos>.x -= speed;
+            ballPos.x -= speed * deltaTime;
+            speed = 3.5f;
+            sound::playRunSound();
+        }
+        if (IsKeyDown(KEY_DOWN) || IsKeyDown(KEY_S)) {
+            // down: <entityPos>.y += speed;
+            ballPos.y += speed * deltaTime;
+            speed = 3.5f;
+            sound::playRunSound();
+        }
+        if (IsKeyDown(KEY_UP) || IsKeyDown(KEY_W)) {
+            ballPos.y -= speed * deltaTime;
+            speed = 3.5f;
+            sound::playRunSound();
         }
         // prevent player go out of screen
         if (ballPos.x - ballRange <= 0) {
@@ -62,25 +89,6 @@ int main() {
         }
         if (ballPos.y + ballRange >= windowY) {
             ballPos.y = windowY - ballRange;
-        }
-        if (IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_D)) {
-            // right: use <entityPos>.x += speed;
-            ballPos.x += speed * deltaTime;
-            sound::playRunSound();
-        }
-        if (IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_A)) {
-            // left: like right, but is <entityPos>.x -= speed;
-            ballPos.x -= speed * deltaTime;
-            sound::playRunSound();
-        }
-        if (IsKeyDown(KEY_DOWN) || IsKeyDown(KEY_S)) {
-            // down: <entityPos>.y += speed;
-            ballPos.y += speed * deltaTime;
-            sound::playRunSound();
-        }
-        if (IsKeyDown(KEY_UP) || IsKeyDown(KEY_W)) {
-            ballPos.y -= speed * deltaTime;
-            sound::playRunSound();
         }
         // draw it!
         BeginDrawing();
