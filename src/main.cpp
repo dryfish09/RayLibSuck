@@ -54,27 +54,28 @@ int main() {
             ballPos.y -= speed * deltaTime;
             sound::playFootstepSound();
         }
+        // player will move slower when player hold to move
         if (IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_D)) {
+            speed = 3.5f;
             // right: use <entityPos>.x += speed;
             ballPos.x += speed * deltaTime;
-            speed = 3.5f;
             sound::playRunSound();
         }
         if (IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_A)) {
+            speed = 3.5f;
             // left: like right, but is <entityPos>.x -= speed;
             ballPos.x -= speed * deltaTime;
-            speed = 3.5f;
             sound::playRunSound();
         }
         if (IsKeyDown(KEY_DOWN) || IsKeyDown(KEY_S)) {
+            speed = 3.5f;
             // down: <entityPos>.y += speed;
             ballPos.y += speed * deltaTime;
-            speed = 3.5f;
             sound::playRunSound();
         }
         if (IsKeyDown(KEY_UP) || IsKeyDown(KEY_W)) {
-            ballPos.y -= speed * deltaTime;
             speed = 3.5f;
+            ballPos.y -= speed * deltaTime;
             sound::playRunSound();
         }
         // prevent player go out of screen
