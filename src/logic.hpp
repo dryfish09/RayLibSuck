@@ -76,5 +76,14 @@ inline void insertLogic() {
         if (ballPos.y + ballRadius >= windowY) {
             ballPos.y = windowY - ballRadius;
         }
+        BeginDrawing();
+        ClearBackground(GREEN);
+        // draw some circle
+        DrawCircleV(ballPos, ballRadius, GOLD);
+        DrawTextureV(texture::flowerTexture, flowerPos, WHITE);
+        DrawTextureV(texture::flowerTexture, flowerPos2, WHITE);
+        DrawTextureV(texture::flowerTexture, flowerPos3, WHITE);
+        DrawText("Use arrow keys or WASD to move!", 20, 20, 20, BLACK);
+        EndDrawing();
     }
 }
