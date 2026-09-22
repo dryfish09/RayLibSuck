@@ -60,11 +60,11 @@ inline void insertLogic() {
             ballPos.y -= runSpeed;
             sound::playRunSound();
         }
-        // dash:
-        else if (IsKeyDown(KEY_SPACE) && IsKeyDown(KEY_Y)) {
+        // easter egg for who knows some code
+        else if (IsKeyDown(KEY_Y)) {
             ballPos.y += dashSpeed;
         }
-        else if (IsKeyDown(KEY_SPACE) && IsKeyDown(KEY_X)) {
+        else if (IsKeyDown(KEY_X)) {
             ballPos.x += dashSpeed;
         }
         // prevent player go out of screen
