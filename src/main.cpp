@@ -74,10 +74,10 @@ int main() {
             sound::playRunSound();
         }
         // dash:
-        else if (IsKeyPressed(KEY_SPACE) && IsKeyDown(KEY_Y)) {
+        else if (IsKeyDown(KEY_SPACE) && IsKeyDown(KEY_Y)) {
             ballPos.y += dashSpeed;
         }
-        else if (IsKeyPressed(KEY_SPACE) && IsKeyDown(KEY_X)) {
+        else if (IsKeyDown(KEY_SPACE) && IsKeyDown(KEY_X)) {
             ballPos.x += dashSpeed;
         }
         // prevent player go out of screen
