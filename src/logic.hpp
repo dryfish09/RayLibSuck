@@ -1,11 +1,14 @@
 #pragma once
 #include "raylib.h"
+inline const int windowX = 800;
+inline const int windowY = 700;
+inline const float ballRadius = 9.5f;
 inline void insertLogic() {
     Vector2 ballPos = {30, 40};
     Vector2 flowerPos = {0, 0};
     Vector2 flowerPos2 = {0, 0};
     Vector2 flowerPos3 = {0, 0};
-    const int flowerRadius = 20;
+    inline const int flowerRadius = 20;
     flowerPos.x = (int)GetRandomValue(flowerRadius, windowX - flowerRadius);
     flowerPos.y = (int)GetRandomValue(flowerRadius, windowY - flowerRadius);
     flowerPos2.x = (int)GetRandomValue(flowerRadius, windowX - flowerRadius);
