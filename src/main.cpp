@@ -4,9 +4,6 @@
 #include "./logic.hpp"
 
 int main() {
-    const int windowX = 800;
-    const int windowY = 700;
-    const float ballRadius = 9.5f;
     // init windows
     InitWindow(windowX, windowY, "Ball's tiny world 2D");
     // init sound:
