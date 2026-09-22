@@ -31,6 +31,7 @@ int main() {
     // speed: 
     float speed = 5.5f;
     float runSpeed = 4.5f;
+    float dashSpeed = 6.0f;
     while (!WindowShouldClose()) {
         // move ball with arrows
         if (IsKeyPressed(KEY_RIGHT) || IsKeyPressed(KEY_D)) {
@@ -71,6 +72,13 @@ int main() {
         else if (IsKeyDown(KEY_UP) || IsKeyDown(KEY_W)) {
             ballPos.y -= runSpeed;
             sound::playRunSound();
+        }
+        // dash:
+        else if (IsKeyDown(KEY_SPACE) && IsKeyDown(KEY_Y)) {
+            ballPos.y += dashSpeed;
+        }
+        else if (IsKeyDown(KEY_SPACE) && IsKeyDown(KEY_X)) {
+            ballPos.x += dashSpeed;
         }
         // prevent player go out of screen
         if (ballPos.x - ballRadius <= 0) {
