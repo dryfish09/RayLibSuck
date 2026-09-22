@@ -1,5 +1,20 @@
 #include "raylib.h"
 inline void insertLogic() {
+    Vector2 ballPos = {30, 40};
+    Vector2 flowerPos = {0, 0};
+    Vector2 flowerPos2 = {0, 0};
+    Vector2 flowerPos3 = {0, 0};
+    const int flowerRadius = 20;
+    flowerPos.x = (int)GetRandomValue(flowerRadius, windowX - flowerRadius);
+    flowerPos.y = (int)GetRandomValue(flowerRadius, windowY - flowerRadius);
+    flowerPos2.x = (int)GetRandomValue(flowerRadius, windowX - flowerRadius);
+    flowerPos2.y = (int)GetRandomValue(flowerRadius, windowY - flowerRadius);
+    flowerPos3.x = (int)GetRandomValue(flowerRadius, windowX - flowerRadius);
+    flowerPos3.y = (int)GetRandomValue(flowerRadius, windowY - flowerRadius);
+    // speed: 
+    float speed = 5.5f;
+    float runSpeed = 4.5f;
+    float dashSpeed = 6.0f;
     while (!WindowShouldClose()) {
         // move ball with arrows
         if (IsKeyPressed(KEY_RIGHT) || IsKeyPressed(KEY_D)) {
