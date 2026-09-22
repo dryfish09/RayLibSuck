@@ -1,3 +1,4 @@
+#pragma once
 #include "raylib.h"
 inline void insertLogic() {
     Vector2 ballPos = {30, 40};
