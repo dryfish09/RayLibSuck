@@ -86,7 +86,7 @@ int main() {
             ballPos.x = ballRadius;
         }
         if (ballPos.x + ballRadius >= windowX) {
-            ballPos.x = windowX - ballRange;
+            ballPos.x = windowX - ballRadius;
         }
         if (ballPos.y - ballRadius <= 0) {
             ballPos.y = ballRadius;
@@ -98,7 +98,7 @@ int main() {
         BeginDrawing();
         ClearBackground(GREEN);
         // draw some circle
-        DrawCircleV(ballPos, ballRange, GOLD);
+        DrawCircleV(ballPos, ballRadius, GOLD);
         DrawTextureV(texture::flowerTexture, flowerPos, WHITE);
         DrawTextureV(texture::flowerTexture, flowerPos2, WHITE);
         DrawTextureV(texture::flowerTexture, flowerPos3, WHITE);
