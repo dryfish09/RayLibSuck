@@ -8,7 +8,7 @@ inline void insertLogic() {
     Vector2 flowerPos = {0, 0};
     Vector2 flowerPos2 = {0, 0};
     Vector2 flowerPos3 = {0, 0};
-    inline const int flowerRadius = 20;
+    const int flowerRadius = 20;
     flowerPos.x = (int)GetRandomValue(flowerRadius, windowX - flowerRadius);
     flowerPos.y = (int)GetRandomValue(flowerRadius, windowY - flowerRadius);
     flowerPos2.x = (int)GetRandomValue(flowerRadius, windowX - flowerRadius);
