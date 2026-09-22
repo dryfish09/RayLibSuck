@@ -5,7 +5,7 @@
 int main() {
     constexpr int windowX = 800;
     constexpr int windowY = 700;
-    constexpr float ballRange = 9.5f;
+    constexpr float ballRadius = 9.5f;
     // init windows
     InitWindow(windowX, windowY, "Ball's tiny world 2D");
     // init sound:
@@ -21,13 +21,13 @@ int main() {
     Vector2 flowerPos = {0, 0};
     Vector2 flowerPos2 = {0, 0};
     Vector2 flowerPos3 = {0, 0};
-    constexpr int flowerRange = 20;
-    flowerPos.x = (int)GetRandomValue(flowerRange, windowX - flowerRange);
-    flowerPos.y = (int)GetRandomValue(flowerRange, windowY - flowerRange);
-    flowerPos2.x = (int)GetRandomValue(flowerRange, windowX - flowerRange);
-    flowerPos2.y = (int)GetRandomValue(flowerRange, windowY - flowerRange);
-    flowerPos3.x = (int)GetRandomValue(flowerRange, windowX - flowerRange);
-    flowerPos3.y = (int)GetRandomValue(flowerRange, windowY - flowerRange);
+    constexpr int flowerRadius = 20;
+    flowerPos.x = (int)GetRandomValue(flowerRadius, windowX - flowerRadius);
+    flowerPos.y = (int)GetRandomValue(flowerRadius, windowY - flowerRadius);
+    flowerPos2.x = (int)GetRandomValue(flowerRadius, windowX - flowerRadius);
+    flowerPos2.y = (int)GetRandomValue(flowerRadius, windowY - flowerRadius);
+    flowerPos3.x = (int)GetRandomValue(flowerRadius, windowX - flowerRadius);
+    flowerPos3.y = (int)GetRandomValue(flowerRadius, windowY - flowerRadius);
     // ishowspeed, lol, it's speed
     float speed = 5.3f; // not chill
     while (!WindowShouldClose()) {
@@ -82,17 +82,17 @@ int main() {
             sound::playRunSound();
         }
         // prevent player go out of screen
-        if (ballPos.x - ballRange <= 0) {
-            ballPos.x = ballRange;
+        if (ballPos.x - ballRadius <= 0) {
+            ballPos.x = ballRadius;
         }
-        if (ballPos.x + ballRange >= windowX) {
+        if (ballPos.x + ballRadius >= windowX) {
             ballPos.x = windowX - ballRange;
         }
-        if (ballPos.y - ballRange <= 0) {
-            ballPos.y = ballRange;
+        if (ballPos.y - ballRadius <= 0) {
+            ballPos.y = ballRadius;
         }
-        if (ballPos.y + ballRange >= windowY) {
-            ballPos.y = windowY - ballRange;
+        if (ballPos.y + ballRadius >= windowY) {
+            ballPos.y = windowY - ballRadius;
         }
         // draw it!
         BeginDrawing();
