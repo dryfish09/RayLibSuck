@@ -9,7 +9,7 @@ int main() {
     // set target fps
     SetTargetFPS(60);
     insertLogic();
-    closeAndUnload();
+    unloadAndClose();
     return 0;
 }
 
