@@ -14,6 +14,10 @@ inline void init() {
 }
 inline void unloadAndClose() {
     CloseAudioDevice();
+    // close sound:
+    sound::unloadDeclaredSound();
+    // unload texture
+    texture::unloadTexture();
     // close windows
     CloseWindow();
 )
