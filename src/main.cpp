@@ -11,9 +11,6 @@ int main() {
     sound::unloadDeclaredSound();
     // unload texture
     texture::unloadTexture();
-    CloseAudioDevice();
-    // close windows
-    CloseWindow();
     return 0;
 }
 
