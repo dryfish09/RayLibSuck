@@ -7,10 +7,6 @@ int main() {
     // set target fps
     SetTargetFPS(60);
     insertLogic();
-    // close sound:
-    sound::unloadDeclaredSound();
-    // unload texture
-    texture::unloadTexture();
     return 0;
 }
 
