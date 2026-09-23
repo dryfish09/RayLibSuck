@@ -1,5 +1,5 @@
 #pragma once
-#include "rayib.h"
+#include "raylib.h"
 #include "./gvar.hpp"
 #include "./sound.hpp"
 #include "./texture.hpp"
@@ -14,11 +14,11 @@ inline void init() {
     texture::loadTexture();
 }
 inline void unloadAndClose() {
-    CloseAudioDevice();
     // close sound:
     sound::unloadDeclaredSound();
+    CloseAudioDevice();
     // unload texture
     texture::unloadTexture();
     // close windows
     CloseWindow();
-)
+}
