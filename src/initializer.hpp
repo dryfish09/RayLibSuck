@@ -1,3 +1,4 @@
+#pragma once
 #include "rayib.h"
 #include "./gvar.hpp"
 #include "./sound.hpp"
