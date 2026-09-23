@@ -1,5 +1,7 @@
 #include "rayib.h"
 #include "./gvar.hpp"
+#include "./sound.hpp"
+#include "./texture.hpp"
 inline void init() {
     // init windows
     InitWindow(windowX, windowY, "Ball's tiny world 2D");
@@ -10,3 +12,8 @@ inline void init() {
     //load texture
     texture::loadTexture();
 }
+inline void unloadAndClose() {
+    CloseAudioDevice();
+    // close windows
+    CloseWindow();
+)
