@@ -1,5 +1,6 @@
 #pragma once
 #include "raylib.h"
+#include "./gvar.hpp"
 inline const float ballRadius = 9.5f;
 inline void insertLogic() {
     Vector2 ballPos = {30, 40};
