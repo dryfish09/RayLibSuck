@@ -87,6 +87,8 @@ inline void insertLogic() {
         DrawTextureV(texture::flowerTexture, flowerPos2, WHITE);
         DrawTextureV(texture::flowerTexture, flowerPos3, WHITE);
         DrawText("Use arrow keys or WASD to move!", 20, 20, 20, BLACK);
+        // draw background
+        texture::drawBackground(texture::bg);
         EndDrawing();
     }
 }
