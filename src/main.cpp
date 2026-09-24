@@ -1,6 +1,6 @@
 #include "raylib.h"
 #include "game/sound/sound.h"
-#include "game/texture/texture.hpp"
+#include "game/texture/texture.h"
 #include "game/logic/logic.h"
 #include "game/init/init.h"
 
