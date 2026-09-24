@@ -83,6 +83,7 @@ inline void insertLogic() {
         ClearBackground(GREEN);
         // draw some circle
         DrawCircleV(ballPos, ballRadius, GOLD);
+        drawBackground(texture::bg);
         DrawTextureV(texture::flowerTexture, flowerPos, WHITE);
         DrawTextureV(texture::flowerTexture, flowerPos2, WHITE);
         DrawTextureV(texture::flowerTexture, flowerPos3, WHITE);
