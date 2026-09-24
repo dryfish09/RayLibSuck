@@ -7,6 +7,9 @@ inline void insertLogic() {
     Vector2 flowerPos = {0, 0};
     Vector2 flowerPos2 = {0, 0};
     Vector2 flowerPos3 = {0, 0};
+    Vector2 flowerPos4 = {0, 0};
+    Vector2 flowerPos5 = {0, 0};
+    Vector2 flowerPos6 = {0, 0};
     const int flowerRadius = 20;
     flowerPos.x = (int)GetRandomValue(flowerRadius, windowX - flowerRadius);
     flowerPos.y = (int)GetRandomValue(flowerRadius, windowY - flowerRadius);
@@ -14,6 +17,12 @@ inline void insertLogic() {
     flowerPos2.y = (int)GetRandomValue(flowerRadius, windowY - flowerRadius);
     flowerPos3.x = (int)GetRandomValue(flowerRadius, windowX - flowerRadius);
     flowerPos3.y = (int)GetRandomValue(flowerRadius, windowY - flowerRadius);
+    flowerPos4.x = (int)GetRandomValue(flowerRadius, windowX - flowerRadius);
+    flowerPos4.y = (int)GetRandomValue(flowerRadius, windowY - flowerRadius);
+    flowerPos5.x = (int)GetRandomValue(flowerRadius, windowX - flowerRadius);
+    flowerPos5.y = (int)GetRandomValue(flowerRadius, windowY - flowerRadius);
+    flowerPos6.x = (int)GetRandomValue(flowerRadius, windowX - flowerRadius);
+    flowerPos6.y = (int)GetRandomValue(flowerRadius, windowY - flowerRadius);
     // speed: 
     float speed = 5.5f;
     float runSpeed = 4.5f;
@@ -86,6 +95,9 @@ inline void insertLogic() {
         DrawTextureV(texture::flowerTexture, flowerPos, WHITE);
         DrawTextureV(texture::flowerTexture, flowerPos2, WHITE);
         DrawTextureV(texture::flowerTexture, flowerPos3, WHITE);
+        DrawTextureV(texture::flowerTexture, flowerPos4, WHITE);
+        DrawTextureV(texture::flowerTexture, flowerPos5, WHITE);
+        DrawTextureV(texture::flowerTexture, flowerPos6, WHITE);
         DrawText("Use arrow keys or WASD to move!", 20, 20, 20, BLACK);
         // draw background
         texture::drawBackground(texture::bg);
