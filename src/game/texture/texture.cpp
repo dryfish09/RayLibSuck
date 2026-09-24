@@ -1,5 +1,6 @@
 #pragma once
 #include "raylib.h"
+#include "texture.h"
 namespace texture {
     Texture2D flowerTexture;
     Texture2D bg;
