@@ -1,8 +1,8 @@
 #include "raylib.h"
-#include "./game/sound/sound.h"
-#include "./game/texture/texture.hpp"
-#include "./game/logic/logic.h"
-#include "./game/init/init.h"
+#include "game/sound/sound.h"
+#include "game/texture/texture.hpp"
+#include "game/logic/logic.h"
+#include "game/init/init.h"
 
 int main() {
     init();
