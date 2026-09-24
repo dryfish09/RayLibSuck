@@ -19,6 +19,9 @@ namespace texture {
     inline void loadBg() {
         bg = LoadTexture("src/assets/texture/bg.png");
     }
+    inline void unloadBg() {
+        UnloadTexture(bg);
+    }
     inline void unloadTexture() {
         UnloadTexture(flowerTexture);
     }
