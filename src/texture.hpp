@@ -3,7 +3,7 @@
 namespace texture {
     inline Texture2D flowerTexture;
     inline Texture2D bg;
-    inline void DrawBackground(Texture2D tex) {
+    inline void drawBackground(Texture2D tex) {
     DrawTexturePro(tex,
         (Rectangle){ 0, 0, (float)tex.width, (float)tex.height },
         (Rectangle){ 0, 0, (float)GetScreenWidth(), (float)GetScreenHeight() },
