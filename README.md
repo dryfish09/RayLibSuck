@@ -35,8 +35,9 @@ Use arrow keys or WASD keys on your keyboard to move, you can't move out of scre
 - [x] add more sounds
 - [x] add textures
 - [ ] add more textures
-- [ ] make game chaotic with bugs and fps bellow 10
-- [ ] delete this repository
+- [ ] add moding api
+- [ ] make game chaotic with bugs and fps bellow 10 - CANCELED
+- [ ] delete this repository - CANCELED
 
 ## Credit:
 - This repository uses an awesome graphic library named RayLib, created by RayLib's author and contributors
