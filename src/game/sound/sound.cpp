@@ -3,28 +3,28 @@
 
 namespace sound {
 
-    inline Sound footstep;
-    inline Sound run;
+    Sound footstep;
+    Sound run;
 
-    inline void loadFootstepSound() {
+    void loadFootstepSound() {
         footstep = LoadSound("src/assets/sound/walkSound.wav");
     }
-    inline void loadRunSound() {
+    void loadRunSound() {
         run = LoadSound("src/assets/sound/run.wav");
     }
-    inline void playRunSound() {
+    void playRunSound() {
         if (!IsSoundPlaying(run) && !IsSoundPlaying(footstep)) {
             PlaySound(run);
         }
     }
 
-    inline void playFootstepSound() {
+    void playFootstepSound() {
         if (!IsSoundPlaying(run) && !IsSoundPlaying(footstep)) {
             PlaySound(footstep);
         }
     }
 
-    inline void unloadDeclaredSound() {
+    void unloadDeclaredSound() {
         UnloadSound(footstep);
         UnloadSound(run);
     }

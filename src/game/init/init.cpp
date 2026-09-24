@@ -1,9 +1,9 @@
 #pragma once
 #include "raylib.h"
-#include "./gvar.hpp"
-#include "./sound.hpp"
-#include "./texture.hpp"
-inline void init() {
+#include "game/var.h"
+#include "game/sound/sound.h"
+#include "game/texture/texture.h"
+void init() {
     // init windows
     InitWindow(windowX, windowY, "Ball's tiny world 2D");
     // init sound:
@@ -14,7 +14,7 @@ inline void init() {
     texture::loadBg();
     texture::loadTexture();
 }
-inline void unloadAndClose() {
+void unloadAndClose() {
     // close sound:
     sound::unloadDeclaredSound();
     CloseAudioDevice();
