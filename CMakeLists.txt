@@ -8,6 +8,7 @@ if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
     set(CMAKE_BUILD_TYPE Release CACHE STRING "" FORCE)
 endif()
 
+# --- raylib ---
 find_package(raylib 5.5 QUIET)
 
 if(raylib_FOUND)
@@ -24,9 +25,25 @@ else()
     FetchContent_MakeAvailable(raylib)
 endif()
 
-add_executable(game src/main.cpp)
+# --- Sources ---
+file(GLOB_RECURSE GAME_SOURCES CONFIGURE_DEPENDS
+    src/*.cpp
+)
+
+add_executable(game ${GAME_SOURCES})
+
+target_include_directories(game PRIVATE src)
+
 target_link_libraries(game PRIVATE raylib)
 
+# --- Warnings ---
+if(MSVC)
+    target_compile_options(game PRIVATE /W4)
+else()
+    target_compile_options(game PRIVATE -Wall -Wextra -Wpedantic)
+endif()
+
+# --- Platform ---
 if(APPLE)
     target_link_libraries(game PRIVATE
         "-framework Cocoa"
@@ -40,4 +57,8 @@ endif()
 
 if(WIN32)
     target_link_libraries(game PRIVATE winmm)
+endif()
+
+if(UNIX AND NOT APPLE)
+    target_link_libraries(game PRIVATE m pthread dl)
 endif()
