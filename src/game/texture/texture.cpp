@@ -1,4 +1,4 @@
-#pragma once
+
 #include "raylib.h"
 #include "texture.h"
 namespace texture {

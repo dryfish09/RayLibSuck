@@ -1,4 +1,4 @@
-#pragma once
+
 #include "raylib.h"
 #include "game/var.h"
 #include "game/sound/sound.h"
