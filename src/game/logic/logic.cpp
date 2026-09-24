@@ -1,6 +1,8 @@
 #pragma once
 #include "raylib.h"
 #include "game/var.h"
+#include "game/sound/sound.h"
+#include "game/texture/texture.h"
 #include "./logic.h"
 inline const float ballRadius = 9.5f;
 inline void insertLogic() {
