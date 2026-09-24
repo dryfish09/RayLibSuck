@@ -1,7 +1,7 @@
 #pragma once
 #include "raylib.h"
 #include "src/game/var.h"
-#include"./logic.h"
+#include "./logic.h"
 inline const float ballRadius = 9.5f;
 inline void insertLogic() {
     Vector2 ballPos = {30, 40};
