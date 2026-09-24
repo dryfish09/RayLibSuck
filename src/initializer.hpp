@@ -20,6 +20,7 @@ inline void unloadAndClose() {
     CloseAudioDevice();
     // unload texture
     texture::unloadTexture();
+    texture::unloadBg();
     // close windows
     CloseWindow();
 }
