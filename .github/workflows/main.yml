@@ -50,28 +50,15 @@ jobs:
             libgl1-mesa-dev libglu1-mesa-dev libxcursor-dev \
             libxinerama-dev libwayland-dev libxkbcommon-dev
 
-      - name: Cache raylib
-        id: cache-raylib
-        uses: actions/cache@v4
-        with:
-          path: ~/raylib-install
-          key: raylib-6.0-linux-${{ hashFiles('.github/workflows/build.yml') }}
-
       - name: Build raylib from source
-        if: steps.cache-raylib.outputs.cache-hit != 'true'
         run: |
           git clone --depth 1 --branch 6.0 https://github.com/raysan5/raylib.git
           cd raylib
           mkdir build && cd build
           cmake -DBUILD_SHARED_LIBS=OFF -DPLATFORM=Desktop \
-            -DCMAKE_BUILD_TYPE=Release \
-            -DCMAKE_INSTALL_PREFIX=$HOME/raylib-install ..
+            -DCMAKE_BUILD_TYPE=Release ..
           make -j$(nproc)
-          make install
-
-      - name: Install cached raylib
-        run: |
-          sudo cp -r $HOME/raylib-install/* /usr/local/
+          sudo make install
           sudo ldconfig
 
       - name: Build game
@@ -111,30 +98,48 @@ jobs:
       - name: Install cmake
         run: brew install cmake
 
-      - name: Cache raylib
-        id: cache-raylib
-        uses: actions/cache@v4
-        with:
-          path: ~/raylib-install
-          key: raylib-6.0-macos-${{ hashFiles('.github/workflows/build.yml') }}
-
-      - name: Build raylib from source
-        if: steps.cache-raylib.outputs.cache-hit != 'true'
+      - name: Build raylib universal
         run: |
           git clone --depth 1 --branch 6.0 https://github.com/raysan5/raylib.git
           cd raylib
-          mkdir build && cd build
+
+          # Build arm64
+          mkdir -p build-arm64 && cd build-arm64
           cmake -DBUILD_SHARED_LIBS=OFF -DPLATFORM=Desktop \
             -DCMAKE_BUILD_TYPE=Release \
-            -DCMAKE_INSTALL_PREFIX=$HOME/raylib-install ..
+            -DCMAKE_OSX_ARCHITECTURES="arm64" \
+            -DCMAKE_INSTALL_PREFIX=$HOME/raylib-arm64 ..
           make -j$(sysctl -n hw.ncpu)
           make install
+          cd ..
 
-      - name: Install cached raylib
+          # Build x86_64
+          mkdir -p build-x86_64 && cd build-x86_64
+          cmake -DBUILD_SHARED_LIBS=OFF -DPLATFORM=Desktop \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_OSX_ARCHITECTURES="x86_64" \
+            -DCMAKE_INSTALL_PREFIX=$HOME/raylib-x86_64 ..
+          make -j$(sysctl -n hw.ncpu)
+          make install
+          cd ..
+
+          # Gộp thành universal
+          mkdir -p $HOME/raylib-install/lib $HOME/raylib-install/include
+          lipo -create \
+            $HOME/raylib-arm64/lib/libraylib.a \
+            $HOME/raylib-x86_64/lib/libraylib.a \
+            -output $HOME/raylib-install/lib/libraylib.a
+          cp -r $HOME/raylib-arm64/include/* $HOME/raylib-install/include/
+
+          echo "=== Universal raylib info ==="
+          lipo -info $HOME/raylib-install/lib/libraylib.a
+
+      - name: Install raylib
         run: |
           sudo cp -r $HOME/raylib-install/* /usr/local/
+          lipo -info /usr/local/lib/libraylib.a
 
-      - name: Build game (universal binary)
+      - name: Build game (universal)
         run: |
           cmake -S . -B build -DCMAKE_BUILD_TYPE=Release \
             -DCMAKE_OSX_ARCHITECTURES="x86_64;arm64"
@@ -143,6 +148,7 @@ jobs:
           echo "=== build done ==="
           ls -la ballTinyWorld-macos
           file ballTinyWorld-macos
+          lipo -info ballTinyWorld-macos
 
       - name: Verify raylib is static
         run: |
@@ -152,6 +158,20 @@ jobs:
             exit 1
           fi
           echo "raylib is static"
+
+      - name: Verify universal binary
+        run: |
+          ARCHS=$(lipo -archs ballTinyWorld-macos)
+          echo "Architectures: $ARCHS"
+          if ! echo "$ARCHS" | grep -q "x86_64"; then
+            echo "Missing x86_64!"
+            exit 1
+          fi
+          if ! echo "$ARCHS" | grep -q "arm64"; then
+            echo "Missing arm64!"
+            exit 1
+          fi
+          echo "Universal binary OK"
 
       - name: Package
         run: |
@@ -185,15 +205,7 @@ jobs:
             git
             zip
 
-      - name: Cache raylib
-        id: cache-raylib
-        uses: actions/cache@v4
-        with:
-          path: /mingw64/lib/libraylib.a
-          key: raylib-6.0-windows-${{ hashFiles('.github/workflows/build.yml') }}
-
       - name: Build raylib from source
-        if: steps.cache-raylib.outputs.cache-hit != 'true'
         run: |
           git clone --depth 1 --branch 6.0 https://github.com/raysan5/raylib.git
           cd raylib
