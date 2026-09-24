@@ -130,23 +130,31 @@ jobs:
             $HOME/raylib-x86_64/lib/libraylib.a \
             -output $HOME/raylib-install/lib/libraylib.a
           cp -r $HOME/raylib-arm64/include/* $HOME/raylib-install/include/
+          cp -r $HOME/raylib-arm64/lib/cmake $HOME/raylib-install/lib/ 2>/dev/null || true
+
+          # Xóa bản arch riêng để tránh nhầm lẫn
+          rm -rf $HOME/raylib-arm64 $HOME/raylib-x86_64
 
           echo "=== Universal raylib info ==="
           lipo -info $HOME/raylib-install/lib/libraylib.a
+          ls -la $HOME/raylib-install/lib/
 
       - name: Install raylib
         run: |
           sudo cp -r $HOME/raylib-install/* /usr/local/
+          echo "=== Installed raylib ==="
           lipo -info /usr/local/lib/libraylib.a
+          ls -la /usr/local/lib/libraylib.a
+          ls /usr/local/lib/cmake/raylib/ 2>/dev/null || echo "No cmake config found"
 
       - name: Build game (universal)
         run: |
           cmake -S . -B build -DCMAKE_BUILD_TYPE=Release \
-            -DCMAKE_OSX_ARCHITECTURES="x86_64;arm64"
+            -DCMAKE_OSX_ARCHITECTURES="x86_64;arm64" \
+            -Draylib_DIR=/usr/local/lib/cmake/raylib
           cmake --build build -j$(sysctl -n hw.ncpu)
           cp build/game ballTinyWorld-macos
           echo "=== build done ==="
-          ls -la ballTinyWorld-macos
           file ballTinyWorld-macos
           lipo -info ballTinyWorld-macos
 
