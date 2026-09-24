@@ -36,13 +36,6 @@ target_include_directories(game PRIVATE src)
 
 target_link_libraries(game PRIVATE raylib)
 
-# --- Warnings ---
-if(MSVC)
-    target_compile_options(game PRIVATE /W4)
-else()
-    target_compile_options(game PRIVATE -Wall -Wextra -Wpedantic)
-endif()
-
 # --- Platform ---
 if(APPLE)
     target_link_libraries(game PRIVATE
