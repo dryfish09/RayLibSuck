@@ -70,6 +70,15 @@ jobs:
           ls -la ballTinyWorld-linux
           file ballTinyWorld-linux
 
+      - name: Verify raylib is static
+        run: |
+          if ldd ballTinyWorld-linux | grep -qi raylib; then
+            echo "raylib still dynamic!"
+            ldd ballTinyWorld-linux | grep raylib
+            exit 1
+          fi
+          echo "raylib is static"
+
       - name: Package
         run: |
           zip -r ballTinyWorld-linux.zip ballTinyWorld-linux src/assets/ run.sh
@@ -89,26 +98,88 @@ jobs:
       - name: Install cmake
         run: brew install cmake
 
-      - name: Build raylib from source
+      - name: Build raylib universal
         run: |
           git clone --depth 1 --branch 6.0 https://github.com/raysan5/raylib.git
           cd raylib
-          mkdir build && cd build
+
+          # Build arm64
+          mkdir -p build-arm64 && cd build-arm64
           cmake -DBUILD_SHARED_LIBS=OFF -DPLATFORM=Desktop \
             -DCMAKE_BUILD_TYPE=Release \
-            -DCMAKE_INSTALL_PREFIX=/usr/local ..
+            -DCMAKE_OSX_ARCHITECTURES="arm64" \
+            -DCMAKE_INSTALL_PREFIX=$HOME/raylib-arm64 ..
           make -j$(sysctl -n hw.ncpu)
-          sudo make install
-          ls -la /usr/local/lib/libraylib.a
+          make install
+          cd ..
 
-      - name: Build game
+          # Build x86_64
+          mkdir -p build-x86_64 && cd build-x86_64
+          cmake -DBUILD_SHARED_LIBS=OFF -DPLATFORM=Desktop \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_OSX_ARCHITECTURES="x86_64" \
+            -DCMAKE_INSTALL_PREFIX=$HOME/raylib-x86_64 ..
+          make -j$(sysctl -n hw.ncpu)
+          make install
+          cd ..
+
+          # Gộp thành universal
+          mkdir -p $HOME/raylib-install/lib $HOME/raylib-install/include
+          lipo -create \
+            $HOME/raylib-arm64/lib/libraylib.a \
+            $HOME/raylib-x86_64/lib/libraylib.a \
+            -output $HOME/raylib-install/lib/libraylib.a
+          cp -r $HOME/raylib-arm64/include/* $HOME/raylib-install/include/
+          cp -r $HOME/raylib-arm64/lib/cmake $HOME/raylib-install/lib/ 2>/dev/null || true
+
+          # Xóa bản arch riêng để tránh nhầm lẫn
+          rm -rf $HOME/raylib-arm64 $HOME/raylib-x86_64
+
+          echo "=== Universal raylib info ==="
+          lipo -info $HOME/raylib-install/lib/libraylib.a
+          ls -la $HOME/raylib-install/lib/
+
+      - name: Install raylib
         run: |
-          cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+          sudo cp -r $HOME/raylib-install/* /usr/local/
+          echo "=== Installed raylib ==="
+          lipo -info /usr/local/lib/libraylib.a
+          ls -la /usr/local/lib/libraylib.a
+          ls /usr/local/lib/cmake/raylib/ 2>/dev/null || echo "No cmake config found"
+
+      - name: Build game (universal)
+        run: |
+          cmake -S . -B build -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_OSX_ARCHITECTURES="x86_64;arm64" \
+            -Draylib_DIR=/usr/local/lib/cmake/raylib
           cmake --build build -j$(sysctl -n hw.ncpu)
           cp build/game ballTinyWorld-macos
           echo "=== build done ==="
-          ls -la ballTinyWorld-macos
           file ballTinyWorld-macos
+          lipo -info ballTinyWorld-macos
+
+      - name: Verify raylib is static
+        run: |
+          if otool -L ballTinyWorld-macos | grep -qi raylib; then
+            echo "raylib still dynamic!"
+            otool -L ballTinyWorld-macos | grep raylib
+            exit 1
+          fi
+          echo "raylib is static"
+
+      - name: Verify universal binary
+        run: |
+          ARCHS=$(lipo -archs ballTinyWorld-macos)
+          echo "Architectures: $ARCHS"
+          if ! echo "$ARCHS" | grep -q "x86_64"; then
+            echo "Missing x86_64!"
+            exit 1
+          fi
+          if ! echo "$ARCHS" | grep -q "arm64"; then
+            echo "Missing arm64!"
+            exit 1
+          fi
+          echo "Universal binary OK"
 
       - name: Package
         run: |
@@ -157,12 +228,22 @@ jobs:
 
       - name: Build game
         run: |
-          cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release
+          cmake -S . -B build -G Ninja \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_EXE_LINKER_FLAGS="-static-libgcc -static-libstdc++"
           cmake --build build
           cp build/game.exe ballTinyWorld-windows.exe
           echo "=== build done ==="
           ls -la ballTinyWorld-windows.exe
           file ballTinyWorld-windows.exe
+
+      - name: Verify raylib is static
+        run: |
+          if objdump -p ballTinyWorld-windows.exe | grep -qi raylib; then
+            echo "raylib still dynamic!"
+            exit 1
+          fi
+          echo "raylib is static"
 
       - name: Package
         run: |
