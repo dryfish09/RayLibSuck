@@ -93,6 +93,8 @@ void insertLogic() {
         }
         BeginDrawing();
         ClearBackground(GREEN);
+        // draw background
+        texture::drawBackground(texture::bg);
         // draw some circle
         DrawCircleV(ballPos, ballRadius, GOLD);
         DrawTextureV(texture::flowerTexture, flowerPos, WHITE);
@@ -102,8 +104,6 @@ void insertLogic() {
         DrawTextureV(texture::flowerTexture, flowerPos5, WHITE);
         DrawTextureV(texture::flowerTexture, flowerPos6, WHITE);
         DrawText("Use arrow keys or WASD to move!", 20, 20, 20, BLACK);
-        // draw background
-        texture::drawBackground(texture::bg);
         EndDrawing();
     }
 }
