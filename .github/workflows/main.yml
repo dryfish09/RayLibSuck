@@ -50,15 +50,28 @@ jobs:
             libgl1-mesa-dev libglu1-mesa-dev libxcursor-dev \
             libxinerama-dev libwayland-dev libxkbcommon-dev
 
+      - name: Cache raylib
+        id: cache-raylib
+        uses: actions/cache@v4
+        with:
+          path: ~/raylib-install
+          key: raylib-6.0-linux-${{ hashFiles('.github/workflows/build.yml') }}
+
       - name: Build raylib from source
+        if: steps.cache-raylib.outputs.cache-hit != 'true'
         run: |
           git clone --depth 1 --branch 6.0 https://github.com/raysan5/raylib.git
           cd raylib
           mkdir build && cd build
           cmake -DBUILD_SHARED_LIBS=OFF -DPLATFORM=Desktop \
-            -DCMAKE_BUILD_TYPE=Release ..
+            -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_INSTALL_PREFIX=$HOME/raylib-install ..
           make -j$(nproc)
-          sudo make install
+          make install
+
+      - name: Install cached raylib
+        run: |
+          sudo cp -r $HOME/raylib-install/* /usr/local/
           sudo ldconfig
 
       - name: Build game
@@ -69,6 +82,15 @@ jobs:
           echo "=== build done ==="
           ls -la ballTinyWorld-linux
           file ballTinyWorld-linux
+
+      - name: Verify raylib is static
+        run: |
+          if ldd ballTinyWorld-linux | grep -qi raylib; then
+            echo "raylib still dynamic!"
+            ldd ballTinyWorld-linux | grep raylib
+            exit 1
+          fi
+          echo "raylib is static"
 
       - name: Package
         run: |
@@ -89,26 +111,47 @@ jobs:
       - name: Install cmake
         run: brew install cmake
 
+      - name: Cache raylib
+        id: cache-raylib
+        uses: actions/cache@v4
+        with:
+          path: ~/raylib-install
+          key: raylib-6.0-macos-${{ hashFiles('.github/workflows/build.yml') }}
+
       - name: Build raylib from source
+        if: steps.cache-raylib.outputs.cache-hit != 'true'
         run: |
           git clone --depth 1 --branch 6.0 https://github.com/raysan5/raylib.git
           cd raylib
           mkdir build && cd build
           cmake -DBUILD_SHARED_LIBS=OFF -DPLATFORM=Desktop \
             -DCMAKE_BUILD_TYPE=Release \
-            -DCMAKE_INSTALL_PREFIX=/usr/local ..
+            -DCMAKE_INSTALL_PREFIX=$HOME/raylib-install ..
           make -j$(sysctl -n hw.ncpu)
-          sudo make install
-          ls -la /usr/local/lib/libraylib.a
+          make install
 
-      - name: Build game
+      - name: Install cached raylib
         run: |
-          cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+          sudo cp -r $HOME/raylib-install/* /usr/local/
+
+      - name: Build game (universal binary)
+        run: |
+          cmake -S . -B build -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_OSX_ARCHITECTURES="x86_64;arm64"
           cmake --build build -j$(sysctl -n hw.ncpu)
           cp build/game ballTinyWorld-macos
           echo "=== build done ==="
           ls -la ballTinyWorld-macos
           file ballTinyWorld-macos
+
+      - name: Verify raylib is static
+        run: |
+          if otool -L ballTinyWorld-macos | grep -qi raylib; then
+            echo "raylib still dynamic!"
+            otool -L ballTinyWorld-macos | grep raylib
+            exit 1
+          fi
+          echo "raylib is static"
 
       - name: Package
         run: |
@@ -142,7 +185,15 @@ jobs:
             git
             zip
 
+      - name: Cache raylib
+        id: cache-raylib
+        uses: actions/cache@v4
+        with:
+          path: /mingw64/lib/libraylib.a
+          key: raylib-6.0-windows-${{ hashFiles('.github/workflows/build.yml') }}
+
       - name: Build raylib from source
+        if: steps.cache-raylib.outputs.cache-hit != 'true'
         run: |
           git clone --depth 1 --branch 6.0 https://github.com/raysan5/raylib.git
           cd raylib
@@ -157,12 +208,22 @@ jobs:
 
       - name: Build game
         run: |
-          cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release
+          cmake -S . -B build -G Ninja \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_EXE_LINKER_FLAGS="-static-libgcc -static-libstdc++"
           cmake --build build
           cp build/game.exe ballTinyWorld-windows.exe
           echo "=== build done ==="
           ls -la ballTinyWorld-windows.exe
           file ballTinyWorld-windows.exe
+
+      - name: Verify raylib is static
+        run: |
+          if objdump -p ballTinyWorld-windows.exe | grep -qi raylib; then
+            echo "raylib still dynamic!"
+            exit 1
+          fi
+          echo "raylib is static"
 
       - name: Package
         run: |
