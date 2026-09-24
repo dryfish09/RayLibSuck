@@ -5,7 +5,7 @@
 #include "game/texture/texture.h"
 #include "./logic.h"
 inline const float ballRadius = 9.5f;
-inline void insertLogic() {
+void insertLogic() {
     Vector2 ballPos = {30, 40};
     Vector2 flowerPos = {0, 0};
     Vector2 flowerPos2 = {0, 0};
