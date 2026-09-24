@@ -1,8 +1,8 @@
 #pragma once
 #include "raylib.h"
-#include "src/game/var.h"
-#include "src/game/sound/sound.h"
-#include "src/game/texture/texture.h"
+#include "game/var.h"
+#include "game/sound/sound.h"
+#include "game/texture/texture.h"
 void init() {
     // init windows
     InitWindow(windowX, windowY, "Ball's tiny world 2D");
