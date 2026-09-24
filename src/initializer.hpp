@@ -11,6 +11,7 @@ inline void init() {
     sound::loadFootstepSound();
     sound::loadRunSound();
     //load texture
+    texture::loadBg();
     texture::loadTexture();
 }
 inline void unloadAndClose() {
