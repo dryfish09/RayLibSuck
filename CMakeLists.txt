@@ -34,7 +34,7 @@ add_executable(game ${GAME_SOURCES})
 
 target_include_directories(game PRIVATE src)
 
-target_link_libraries(game PRIVATE raylib -static)
+target_link_libraries(game PRIVATE raylib)
 
 # --- Platform ---
 if(APPLE)
