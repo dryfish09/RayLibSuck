@@ -5,7 +5,7 @@
 ## What's it:
 This is my first game, written in C++ with Raylib.
 
-You're Ball, a small yellow ball, it lives in a tiny green world that has 3 flowers.
+You're Ball, a small yellow ball, it lives in a tiny green world that has 6 flowers.
 ## How to run app on Linux or MacOS
 ### Linux:
 Linux requires you need to give it a **run permission**. 
