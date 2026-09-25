@@ -9,10 +9,12 @@ this contains game logic.
 `var` (`h`/`cpp`): global variables
 ### Note for contributor:
 Chill, but remember to write **clean code** with:
-- Edit right place: for example: if you want to add windows init check. Add your change into `init/init.cpp`, not `logic/loguc.cpp` or another places.
-- Comment if needed, for reader, and for longer furture
+- Edit right place: for example: if you want to add windows init check. Add your change into `init/init.cpp`, not `logic/logic.cpp` or another places.
+- Comment if needed, for reader, and for longer future
 - Code style must be **same** with my original code:
 1. Variables, function name: `camelCase`
-2. Class, struct, namespace: `PascalCase` for struct, class, `snake_case` for namespace.
-3. Macro: `ALL_CAPS`, i not recommended to use macros, use pure C/C++ instead if you can.
-4. File name: `camelCase`
+2. Class, struct: `PascalCase` for struct, class
+3. Namespqace: `camelCase` for namespace.
+4. Macro: `ALL_CAPS`, i not recommended to use macros, use pure C/C++ instead if you can.
+5. File name: `camelCase`
+- Commit message: You can follow any commit styles you want, but it need to brief about your changes
