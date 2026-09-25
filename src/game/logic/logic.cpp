@@ -34,6 +34,10 @@ void insertLogic() {
     sound::playBgm();
     while (!WindowShouldClose()) {
         UpdateMusicStream(sound::bgm);
+        // check is bgm are playing and replay it
+        if(!IsMusicStreamPlaying()) {
+            sound::playBgm();
+        }
         // move ball with arrows and W, A, S, D
         if (IsKeyPressed(KEY_RIGHT) || IsKeyPressed(KEY_D)) {
             ballPos.x += speed;
