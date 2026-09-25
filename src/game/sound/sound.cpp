@@ -1,8 +1,8 @@
-
+#include "sound.h"
 #include "raylib.h"
 
 namespace sound {
-
+    Music bgm;
     Sound footstep;
     Sound run;
 
