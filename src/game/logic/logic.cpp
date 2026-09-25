@@ -91,7 +91,7 @@ void insertLogic() {
         // draw background
         texture::drawBackground(texture::bg);
         // draw some circle
-        DrawCircleV(ballPos, ballRadius, GOLD);
+        DrawTextureV(texture::ball, ballPos, WHITE);
         DrawTextureV(texture::flowerTexture, flowerPos, WHITE);
         DrawTextureV(texture::flowerTexture, flowerPos2, WHITE);
         DrawTextureV(texture::flowerTexture, flowerPos3, WHITE);
