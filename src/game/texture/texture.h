@@ -3,6 +3,7 @@
 namespace texture {
     extern Texture2D flowerTexture;
     extern Texture2D bg;
+    extern Texture2D ball;
     void drawBackground(Texture2D tex);
     void loadTexture();
     void loadBg();
