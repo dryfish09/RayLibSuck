@@ -9,5 +9,5 @@ First, i want to say **THANK YOU** because you consider to read my codebase or c
 
 - `assets`: image, sound stuff.
 
-- That's is!
+- That is!
 
