@@ -31,20 +31,17 @@ void insertLogic() {
     float runSpeed = 4.5f;
     float dashSpeed = 6.0f;
     while (!WindowShouldClose()) {
-        // move ball with arrows
+        // move ball with arrows and W, A, S, D
         if (IsKeyPressed(KEY_RIGHT) || IsKeyPressed(KEY_D)) {
-            // right: use <entityPos>.x += speed;
             ballPos.x += speed;
             // play sound
             sound::playFootstepSound();
         }
         else if (IsKeyPressed(KEY_LEFT) || IsKeyPressed(KEY_A)) {
-            // left: like right, but is <entityPos>.x -= speed;
             ballPos.x -= speed;
             sound::playFootstepSound();
         }
         else if (IsKeyPressed(KEY_DOWN) || IsKeyPressed(KEY_S)) {
-            // down: <entityPos>.y += speed;
             ballPos.y += speed;
             sound::playFootstepSound();
         }
@@ -54,12 +51,10 @@ void insertLogic() {
         }
         // player will move slower when player hold to move
         else if (IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_D)) {
-            // right: use <entityPos>.x += speed;
-            ballPos.x += runSpeed;;
+            ballPos.x += runSpeed;
             sound::playRunSound();
         }
         else if (IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_A)) {
-            // left: like right, but is <entityPos>.x -= speed;
             ballPos.x -= runSpeed;
             sound::playRunSound();
         }
