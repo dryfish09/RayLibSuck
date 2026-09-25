@@ -35,7 +35,7 @@ void insertLogic() {
     while (!WindowShouldClose()) {
         UpdateMusicStream(sound::bgm);
         // check is bgm are playing and replay it
-        if(!IsMusicStreamPlaying()) {
+        if(!IsMusicStreamPlaying(sound::bgm)) {
             sound::playBgm();
         }
         // move ball with arrows and W, A, S, D
