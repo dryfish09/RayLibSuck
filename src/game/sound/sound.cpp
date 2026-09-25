@@ -14,6 +14,7 @@ namespace sound {
     }
     void loadBgm() {
         bgm = LoadMusicStream("src/assets/sound/bgm.mp3");
+    }
     void playRunSound() {
         if (!IsSoundPlaying(run) && !IsSoundPlaying(footstep)) {
             PlaySound(run);
