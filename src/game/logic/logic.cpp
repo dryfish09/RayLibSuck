@@ -30,7 +30,10 @@ void insertLogic() {
     float speed = 5.5f;
     float runSpeed = 4.5f;
     float dashSpeed = 6.0f;
+    // play background music 
+    sound::playBgm();
     while (!WindowShouldClose()) {
+        UpdateMusicStream(sound::bgm);
         // move ball with arrows and W, A, S, D
         if (IsKeyPressed(KEY_RIGHT) || IsKeyPressed(KEY_D)) {
             ballPos.x += speed;

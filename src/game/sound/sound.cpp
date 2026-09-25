@@ -1,8 +1,8 @@
-
+#include "sound.h"
 #include "raylib.h"
 
 namespace sound {
-
+    Music bgm;
     Sound footstep;
     Sound run;
 
@@ -12,10 +12,16 @@ namespace sound {
     void loadRunSound() {
         run = LoadSound("src/assets/sound/run.wav");
     }
+    void loadBgm() {
+        bgm = LoadMusicStream("src/assets/sound/bgm.mp3");
+    }
     void playRunSound() {
         if (!IsSoundPlaying(run) && !IsSoundPlaying(footstep)) {
             PlaySound(run);
         }
+    }
+    void playBgm() {
+        PlayMusicStream(bgm);
     }
 
     void playFootstepSound() {
@@ -28,5 +34,7 @@ namespace sound {
         UnloadSound(footstep);
         UnloadSound(run);
     }
-
+    void unloadBgm() {
+        UnloadMusicStream(bgm);
+    }
 }
