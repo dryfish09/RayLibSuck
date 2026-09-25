@@ -1,5 +1,5 @@
 #pragma once
-
+#include "raylib.h"
 namespace sound {
 
     extern Sound footstep;
