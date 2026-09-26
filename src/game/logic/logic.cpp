@@ -4,11 +4,12 @@
 #include "game/sound/sound.h"
 #include "game/texture/texture.h"
 #include "game/spawn/flower/flower_spawner.h"
+#include "game/spawn/player/ball_spawner.h"
 #include "logic.h"
-inline const float ballRadius = 9.5f;
+using namespace spawn;
 void insertLogic() {
-    Vector2 ballPos = {30, 40};
-    spawn::spawnFlower();
+    spawnBall();
+    spawnFlower();
     // speed: 
     float dt = GetFrameTime();
     float speed = 300.5f;
