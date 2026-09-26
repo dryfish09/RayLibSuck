@@ -8,7 +8,6 @@
 #include "logic.h"
 inline const float ballRadius = 9.5f;
 void insertLogic() {
-    Vector2 ballPos = {100, 100}; // :)
     spawn::spawnBall();
     spawn::spawnFlower();
     // speed: 
