@@ -7,7 +7,7 @@ namespace spawn {
     Vector2 flowerPos4;
     Vector2 flowerPos5;
     Vector2 flowerPos6;
-    const int flowerRadius
+    const int flowerRadius = 20;
     void spawnFlower() {
         flowerPos = {0, 0};
         flowerPos2 = {0, 0};
@@ -15,7 +15,6 @@ namespace spawn {
         flowerPos4 = {0, 0};
         flowerPos5 = {0, 0};
         flowerPos6 = {0, 0};
-        flowerRadius = 20;
         flowerPos.x = (int)GetRandomValue(flowerRadius, windowX - flowerRadius);
         flowerPos.y = (int)GetRandomValue(flowerRadius, windowY - flowerRadius);
         flowerPos2.x = (int)GetRandomValue(flowerRadius, windowX - flowerRadius);
