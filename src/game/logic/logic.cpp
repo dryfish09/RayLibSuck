@@ -80,6 +80,12 @@ void insertLogic() {
         else if (IsKeyDown(KEY_X)) {
             ballPos.x += dashSpeed;
         }
+        else if (IsKeyDown(KEY_X) && IsKeyDown(KEY_LEFT_SHIFT)) {
+            ballPos.x -= dashSpeed;
+        }
+        else if (IsKeyDown(KEY_Y) && IsKeyDown(KEY_LEFT_SHIFT)) {
+            ballPos.y -= dashSpeed;
+        }
         // prevent player go out of screen
         if (ballPos.x - ballRadius <= 0) {
             ballPos.x = ballRadius;
