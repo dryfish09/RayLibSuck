@@ -1,4 +1,5 @@
 #include "raylib.h"
+#include "game/var.h"
 #include "flower_spawner.h"
 namespace spawn {
     Vector2 flowerPos;
