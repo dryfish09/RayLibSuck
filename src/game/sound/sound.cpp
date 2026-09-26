@@ -7,7 +7,7 @@ namespace sound {
     Sound run;
 
     void loadFootstepSound() {
-        footstep = LoadSound("src/assets/sound/walkSound.wav");
+        footstep = LoadSound("src/assets/sound/walk.wav");
     }
     void loadRunSound() {
         run = LoadSound("src/assets/sound/run.wav");
