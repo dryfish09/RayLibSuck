@@ -1,14 +1,21 @@
 #include "raylib.h"
 #include "flower_spawner.h"
 namespace spawn {
+    Vector2 flowerPos;
+    Vector2 flowerPos2;
+    Vector2 flowerPos3;
+    Vector2 flowerPos4;
+    Vector2 flowerPos5;
+    const2 flowerPos6;
+    const int flowerRadius
     void spawnFlower() {
-        Vector2 flowerPos = {0, 0};
-        Vector2 flowerPos2 = {0, 0};
-        Vector2 flowerPos3 = {0, 0};
-        Vector2 flowerPos4 = {0, 0};
-        Vector2 flowerPos5 = {0, 0};
-        Vector2 flowerPos6 = {0, 0};
-        const int flowerRadius = 20;
+        flowerPos = {0, 0};
+        flowerPos2 = {0, 0};
+        flowerPos3 = {0, 0};
+        flowerPos4 = {0, 0};
+        flowerPos5 = {0, 0};
+        flowerPos6 = {0, 0};
+        flowerRadius = 20;
         flowerPos.x = (int)GetRandomValue(flowerRadius, windowX - flowerRadius);
         flowerPos.y = (int)GetRandomValue(flowerRadius, windowY - flowerRadius);
         flowerPos2.x = (int)GetRandomValue(flowerRadius, windowX - flowerRadius);
