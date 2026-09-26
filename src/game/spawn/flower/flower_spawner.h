@@ -1,5 +1,5 @@
+#pragma once
 #include "raylib.h"
-#include "flower_spawner.h"
 namespace spawn {
     extern Vector2 flowerPos;
     extern Vector2 flowerPos2;
