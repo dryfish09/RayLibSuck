@@ -6,11 +6,11 @@
 #include "game/spawn/flower/flower_spawner.h"
 #include "game/spawn/player/ball_spawner.h"
 #include "logic.h"
+using namespace spawn;
 inline const float ballRadius = 9.5f;
 void insertLogic() {
-    spawn::ballPos;
-    spawn::spawnBall();
-    spawn::spawnFlower();
+    spawnBall();
+    spawnFlower();
     // speed: 
     float dt = GetFrameTime();
     float speed = 300.5f;
