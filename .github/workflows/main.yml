@@ -361,7 +361,7 @@ jobs:
       - name: Upload to itch.io (macOS)
         uses: yeslayla/butler-publish-itchio-action@master
         env:
-          BUTLER_CREDENTIALS: ${{ secrets.BUTLER_API_KEY }}
+          BUTLER_CREDENTIALS: ${{ secrets.ITCH_API }}
           CHANNEL: macos
           ITCH_GAME: ball-tiny-world
           ITCH_USER: dryfish09
@@ -370,7 +370,7 @@ jobs:
       - name: Upload to itch.io (Windows)
         uses: yeslayla/butler-publish-itchio-action@master
         env:
-          BUTLER_CREDENTIALS: ${{ secrets.BUTLER_API_KEY }}
+          BUTLER_CREDENTIALS: ${{ secrets.ITCH_API }}
           CHANNEL: windows
           ITCH_GAME: ball-tiny-world
           ITCH_USER: dryfish09
