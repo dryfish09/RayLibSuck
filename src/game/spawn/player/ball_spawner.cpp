@@ -4,6 +4,7 @@
 #include "ball_spawner.h"
 namespace spawn {
     void spawnBall() {
+        Vector2 ballPos = {100, 100};
         ballPos.x = (int)GetRandomValue(ballRadius, windowX - ballRadius);
         ballPos.y = (int)GetRandomValue(ballRadius, windowY - ballRadius);
     }
