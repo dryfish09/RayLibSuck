@@ -1,6 +1,8 @@
 # Ball's 2D World
 
 [![Build and Release](https://github.com/dryfish09/ballGame2d/actions/workflows/main.yml/badge.svg)](https://github.com/dryfish09/ballGame2d/actions/workflows/main.yml)
+![GitHub last commit](https://img.shields.io/github/last-commit/dryfish09/ballGame2d)
+
 
 ## What's it:
 This is my first game, written in C++ with Raylib.
