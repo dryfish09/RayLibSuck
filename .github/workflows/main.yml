@@ -59,7 +59,7 @@ jobs:
 
       - name: Cache raylib
         id: cache-raylib
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: ~/raylib-install
           key: raylib-6.0-linux-${{ runner.os }}-${{ hashFiles('.github/workflows/build.yml') }}
@@ -120,7 +120,7 @@ jobs:
 
       - name: Cache raylib universal
         id: cache-raylib
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: ~/raylib-install
           key: raylib-6.0-macos-universal-${{ runner.os }}-${{ hashFiles('.github/workflows/build.yml') }}
@@ -243,7 +243,7 @@ jobs:
 
       - name: Cache raylib
         id: cache-raylib
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: /mingw64/lib/libraylib.a
           key: raylib-6.0-windows-${{ runner.os }}-${{ hashFiles('.github/workflows/build.yml') }}
