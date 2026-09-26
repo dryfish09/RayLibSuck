@@ -62,7 +62,10 @@ jobs:
         uses: actions/cache@v6
         with:
           path: ~/raylib-install
-          key: raylib-6.0-linux-${{ runner.os }}-${{ hashFiles('.github/workflows/build.yml') }}
+          key: raylib-6.0-linux-x86_64-v6
+          restore-keys: |
+            raylib-6.0-linux-x86_64-
+            raylib-6.0-linux-
 
       - name: Build raylib from source
         if: steps.cache-raylib.outputs.cache-hit != 'true'
@@ -120,10 +123,13 @@ jobs:
 
       - name: Cache raylib universal
         id: cache-raylib
-        uses: actions/cache@v6
+        uses: actions/cache@v7
         with:
           path: ~/raylib-install
-          key: raylib-6.0-macos-universal-${{ runner.os }}-${{ hashFiles('.github/workflows/build.yml') }}
+          key: raylib-6.0-macos-universal-v6
+          restore-keys: |
+            raylib-6.0-macos-universal-
+            raylib-6.0-macos-
 
       - name: Build raylib universal
         if: steps.cache-raylib.outputs.cache-hit != 'true'
@@ -245,8 +251,11 @@ jobs:
         id: cache-raylib
         uses: actions/cache@v6
         with:
-          path: /mingw64/lib/libraylib.a
-          key: raylib-6.0-windows-${{ runner.os }}-${{ hashFiles('.github/workflows/build.yml') }}
+          path: C:\raylib-install
+          key: raylib-6.0-windows-x86_64-v6
+          restore-keys: |
+            raylib-6.0-windows-x86_64-
+            raylib-6.0-windows-
 
       - name: Build raylib from source
         if: steps.cache-raylib.outputs.cache-hit != 'true'
@@ -258,19 +267,23 @@ jobs:
             -DBUILD_SHARED_LIBS=OFF \
             -DPLATFORM=Desktop \
             -DCMAKE_BUILD_TYPE=Release \
-            -DCMAKE_INSTALL_PREFIX=/mingw64 ..
+            -DCMAKE_INSTALL_PREFIX=/c/raylib-install ..
           ninja
           ninja install
+          echo "=== installed ==="
+          ls -la /c/raylib-install/lib/
+          ls -la /c/raylib-install/include/
 
       - name: Verify raylib installed
         run: |
-          ls -la /mingw64/lib/libraylib.a
-          ls -la /mingw64/include/raylib.h
+          ls -la /c/raylib-install/lib/libraylib.a
+          ls -la /c/raylib-install/include/raylib.h
 
       - name: Build game
         run: |
           cmake -S . -B build -G Ninja \
             -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_PREFIX_PATH=/c/raylib-install \
             -DCMAKE_EXE_LINKER_FLAGS="-static-libgcc -static-libstdc++"
           cmake --build build
           cp build/game.exe ballTinyWorld-windows.exe
