@@ -7,7 +7,7 @@
 #include "game/spawn/player/ball_spawner.h"
 #include "logic.h"
 using namespace spawn;
-inline const float ballRadius = 9.5f;
+float ballRadius = 9.5f;
 void insertLogic() {
     spawnBall();
     spawnFlower();
