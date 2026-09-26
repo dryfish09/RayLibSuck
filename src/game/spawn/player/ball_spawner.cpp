@@ -3,8 +3,9 @@
 #include "game/var.h"
 #include "ball_spawner.h"
 namespace spawn {
+    float ballRadius = 9.5f;
+    Vector2 ballPos = {100, 100};
     void spawnBall() {
-        Vector2 ballPos = {100, 100};
         ballPos.x = (int)GetRandomValue(ballRadius, windowX - ballRadius);
         ballPos.y = (int)GetRandomValue(ballRadius, windowY - ballRadius);
     }
