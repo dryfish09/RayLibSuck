@@ -123,7 +123,7 @@ jobs:
 
       - name: Cache raylib universal
         id: cache-raylib
-        uses: actions/cache@v7
+        uses: actions/cache@v6
         with:
           path: ~/raylib-install
           key: raylib-6.0-macos-universal-v6
