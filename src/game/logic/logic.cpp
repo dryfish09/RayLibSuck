@@ -4,15 +4,16 @@
 #include "game/sound/sound.h"
 #include "game/texture/texture.h"
 #include "game/spawn/flower/flower_spawner.h"
-#include "./logic.h"
+#include "logic.h"
 inline const float ballRadius = 9.5f;
 void insertLogic() {
     Vector2 ballPos = {30, 40};
     spawn::spawnFlower();
     // speed: 
-    float speed = 5.5f;
-    float runSpeed = 4.5f;
-    float dashSpeed = 6.0f;
+    float dt = GetFrameTime();
+    float speed = 300.5f;
+    float runSpeed = 240.5f;
+    float dashSpeed = 360.0f;
     // play background music 
     sound::playBgm();
     while (!WindowShouldClose()) {
@@ -23,51 +24,51 @@ void insertLogic() {
         }
         // move ball with arrows and W, A, S, D
         if (IsKeyPressed(KEY_RIGHT) || IsKeyPressed(KEY_D)) {
-            ballPos.x += speed;
+            ballPos.x += speed * dt;
             // play sound
             sound::playFootstepSound();
         }
         else if (IsKeyPressed(KEY_LEFT) || IsKeyPressed(KEY_A)) {
-            ballPos.x -= speed;
+            ballPos.x -= speed * dt;
             sound::playFootstepSound();
         }
         else if (IsKeyPressed(KEY_DOWN) || IsKeyPressed(KEY_S)) {
-            ballPos.y += speed;
+            ballPos.y += speed * dt;
             sound::playFootstepSound();
         }
         else if (IsKeyPressed(KEY_UP) || IsKeyPressed(KEY_W)) {
-            ballPos.y -= speed;
+            ballPos.y -= speed * dt;
             sound::playFootstepSound();
         }
         // player will move slower when player hold to move
         else if (IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_D)) {
-            ballPos.x += runSpeed;
+            ballPos.x += runSpeed * dt;
             sound::playRunSound();
         }
         else if (IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_A)) {
-            ballPos.x -= runSpeed;
+            ballPos.x -= runSpeed * dt;
             sound::playRunSound();
         }
         else if (IsKeyDown(KEY_DOWN) || IsKeyDown(KEY_S)) {
-            ballPos.y += runSpeed;
+            ballPos.y += runSpeed * dt;
             sound::playRunSound();
         }
         else if (IsKeyDown(KEY_UP) || IsKeyDown(KEY_W)) {
-            ballPos.y -= runSpeed;
+            ballPos.y -= runSpeed * dt;
             sound::playRunSound();
         }
         // easter egg for who knows some code
         else if (IsKeyDown(KEY_Y)) {
-            ballPos.y += dashSpeed;
+            ballPos.y += dashSpeed * dt;
         }
         else if (IsKeyDown(KEY_X)) {
-            ballPos.x += dashSpeed;
+            ballPos.x += dashSpeed * dt;
         }
         else if (IsKeyDown(KEY_X) && IsKeyDown(KEY_LEFT_SHIFT)) {
-            ballPos.x -= dashSpeed;
+            ballPos.x -= dashSpeed * dt;
         }
         else if (IsKeyDown(KEY_Y) && IsKeyDown(KEY_LEFT_SHIFT)) {
-            ballPos.y -= dashSpeed;
+            ballPos.y -= dashSpeed * dt;
         }
         // prevent player go out of screen
         if (ballPos.x - ballRadius <= 0) {
