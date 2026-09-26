@@ -6,7 +6,7 @@ namespace spawn {
     Vector2 flowerPos3;
     Vector2 flowerPos4;
     Vector2 flowerPos5;
-    const2 flowerPos6;
+    Vector2 flowerPos6;
     const int flowerRadius
     void spawnFlower() {
         flowerPos = {0, 0};
