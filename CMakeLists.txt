@@ -9,7 +9,7 @@ if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
 endif()
 
 # --- raylib ---
-find_package(raylib 5.5 QUIET)
+find_package(raylib QUIET)
 
 if(raylib_FOUND)
     message(STATUS "Using system-installed raylib")
